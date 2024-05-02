@@ -12,4 +12,4 @@ EdenPURE 500XL is a nice quiet heater, but has annoying issues that caused me to
   - 1 input thermistor for room temp located at back plastic grille
   - Capicitive dropper power supply (this unit is not insulated!) - Produces a -11.5V, 5.6V and 5V rail. These three rails are created by zener diodes
   - SN8P2602BPB - P-DIP 18 pin, external clock
-  - 
+  - 5k NTC Thermistor (first guess is B25/100 is 3988K)
