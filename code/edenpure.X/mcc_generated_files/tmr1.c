@@ -156,21 +156,14 @@ uint8_t TMR1_CheckGateValueStatus(void)
 
 void TMR1_ISR(void)
 {
-    static volatile unsigned int CountCallBack = 0;
 
     // Clear the TMR1 interrupt flag
     PIR1bits.TMR1IF = 0;
     TMR1_WriteTimer(timer1ReloadVal);
 
-    // callback function - called every 10th pass
-    if (++CountCallBack >= TMR1_INTERRUPT_TICKER_FACTOR)
-    {
-        // ticker function call
-        TMR1_CallBack();
-
-        // reset ticker counter
-        CountCallBack = 0;
-    }
+    // ticker function call;
+    // ticker is 1 -> Callback function gets called everytime this ISR executes
+    TMR1_CallBack();
 }
 
 void TMR1_CallBack(void)
