@@ -1,4 +1,4 @@
-# 1 "mcc_generated_files/tmr1.c"
+# 1 "mcc_generated_files/memory.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "mcc_generated_files/tmr1.c" 2
-# 51 "mcc_generated_files/tmr1.c"
+# 1 "mcc_generated_files/memory.c" 2
+# 51 "mcc_generated_files/memory.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4325,170 +4325,192 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\\pic\\include\\xc.h" 2 3
-# 51 "mcc_generated_files/tmr1.c" 2
+# 51 "mcc_generated_files/memory.c" 2
 
-# 1 "mcc_generated_files/tmr1.h" 1
-# 54 "mcc_generated_files/tmr1.h"
+# 1 "mcc_generated_files/memory.h" 1
+# 54 "mcc_generated_files/memory.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdbool.h" 1 3
-# 54 "mcc_generated_files/tmr1.h" 2
-# 101 "mcc_generated_files/tmr1.h"
-void TMR1_Initialize(void);
-# 130 "mcc_generated_files/tmr1.h"
-void TMR1_StartTimer(void);
-# 162 "mcc_generated_files/tmr1.h"
-void TMR1_StopTimer(void);
-# 197 "mcc_generated_files/tmr1.h"
-uint16_t TMR1_ReadTimer(void);
-# 236 "mcc_generated_files/tmr1.h"
-void TMR1_WriteTimer(uint16_t timerVal);
-# 272 "mcc_generated_files/tmr1.h"
-void TMR1_Reload(void);
-# 311 "mcc_generated_files/tmr1.h"
-void TMR1_StartSinglePulseAcquisition(void);
-# 350 "mcc_generated_files/tmr1.h"
-uint8_t TMR1_CheckGateValueStatus(void);
-# 368 "mcc_generated_files/tmr1.h"
-void TMR1_ISR(void);
-# 385 "mcc_generated_files/tmr1.h"
-void TMR1_CallBack(void);
-# 403 "mcc_generated_files/tmr1.h"
- void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
-# 421 "mcc_generated_files/tmr1.h"
-extern void (*TMR1_InterruptHandler)(void);
-# 439 "mcc_generated_files/tmr1.h"
-void TMR1_DefaultInterruptHandler(void);
-# 52 "mcc_generated_files/tmr1.c" 2
+# 54 "mcc_generated_files/memory.h" 2
+# 99 "mcc_generated_files/memory.h"
+uint16_t FLASH_ReadWord(uint16_t flashAddr);
+# 128 "mcc_generated_files/memory.h"
+void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word);
+# 164 "mcc_generated_files/memory.h"
+int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
+# 189 "mcc_generated_files/memory.h"
+void FLASH_EraseBlock(uint16_t startAddr);
+# 220 "mcc_generated_files/memory.h"
+void DATAEE_WriteByte(uint8_t bAdd, uint8_t bData);
+# 246 "mcc_generated_files/memory.h"
+uint8_t DATAEE_ReadByte(uint8_t bAdd);
+# 52 "mcc_generated_files/memory.c" 2
 
 
 
 
 
-volatile uint16_t timer1ReloadVal;
-void (*TMR1_InterruptHandler)(void);
 
-
-
-
-
-void TMR1_Initialize(void)
+uint16_t FLASH_ReadWord(uint16_t flashAddr)
 {
+    uint8_t GIEBitValue = INTCONbits.GIE;
 
+    INTCONbits.GIE = 0;
+    EEADRL = (flashAddr & 0x00FF);
+    EEADRH = ((flashAddr & 0xFF00) >> 8);
 
+    EECON1bits.CFGS = 0;
+    EECON1bits.EEPGD = 1;
+    EECON1bits.RD = 1;
+    __nop();
+    __nop();
+    INTCONbits.GIE = GIEBitValue;
 
-    T1GCON = 0x00;
-
-
-    TMR1H = 0x9E;
-
-
-    TMR1L = 0x58;
-
-
-    PIR1bits.TMR1IF = 0;
-
-
-    timer1ReloadVal=(uint16_t)((TMR1H << 8) | TMR1L);
-
-
-    PIE1bits.TMR1IE = 1;
-
-
-    TMR1_SetInterruptHandler(TMR1_DefaultInterruptHandler);
-
-
-    T1CON = 0x31;
+    return ((uint16_t)((EEDATH << 8) | EEDATL));
 }
 
-void TMR1_StartTimer(void)
+void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word)
 {
+    uint16_t blockStartAddr = (uint16_t)(flashAddr & ((0x1000 -1) ^ (32 -1)));
+    uint8_t offset = (uint8_t)(flashAddr & (32 -1));
+    uint8_t i;
 
-    T1CONbits.TMR1ON = 1;
+
+    for (i=0; i<32; i++)
+    {
+        ramBuf[i] = FLASH_ReadWord((blockStartAddr+i));
+    }
+
+
+    ramBuf[offset] = word;
+
+
+    FLASH_WriteBlock(blockStartAddr, ramBuf);
 }
 
-void TMR1_StopTimer(void)
+int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray)
 {
+    uint16_t blockStartAddr = (uint16_t )(writeAddr & ((0x1000 -1) ^ (32 -1)));
+    uint8_t GIEBitValue = INTCONbits.GIE;
+    uint8_t i,j,numberOfWriteBlocks=0,dataCounter=0;
 
-    T1CONbits.TMR1ON = 0;
-}
-
-uint16_t TMR1_ReadTimer(void)
-{
-    uint16_t readVal;
-    uint8_t readValHigh;
-    uint8_t readValLow;
+    numberOfWriteBlocks = (32/8);
 
 
-    readValLow = TMR1L;
-    readValHigh = TMR1H;
+    if( writeAddr != blockStartAddr )
+    {
+        return -1;
+    }
 
-    readVal = ((uint16_t)readValHigh << 8) | readValLow;
+    INTCONbits.GIE = 0;
 
-    return readVal;
-}
 
-void TMR1_WriteTimer(uint16_t timerVal)
-{
-    if (T1CONbits.nT1SYNC == 1)
+    FLASH_EraseBlock(writeAddr);
+
+    for(j=0; j<numberOfWriteBlocks; j++)
     {
 
-        T1CONbits.TMR1ON = 0;
+  EECON1bits.EEPGD = 1;
+  EECON1bits.CFGS = 0;
+  EECON1bits.WREN = 1;
+  EECON1bits.LWLO = 1;
+
+  for (i=0; i<8; i++)
+  {
+
+   EEADRL = (writeAddr & 0xFF);
+
+   EEADRH = ((writeAddr & 0xFF00) >> 8);
 
 
-        TMR1H = (uint8_t)(timerVal >> 8);
-        TMR1L = (uint8_t)timerVal;
+   EEDATL = flashWordArray[dataCounter];
+   EEDATH = ((flashWordArray[dataCounter] & 0xFF00) >> 8);
+   dataCounter++;
+
+   if(i == (8 -1))
+   {
+
+    EECON1bits.LWLO = 0;
+   }
+
+   EECON2 = 0x55;
+   EECON2 = 0xAA;
+   EECON1bits.WR = 1;
+   __nop();
+   __nop();
+
+   writeAddr++;
+  }
+ }
+
+    EECON1bits.WREN = 0;
+    INTCONbits.GIE = GIEBitValue;
+
+    return 0;
+}
+
+void FLASH_EraseBlock(uint16_t startAddr)
+{
+    uint8_t GIEBitValue = INTCONbits.GIE;
+
+    INTCONbits.GIE = 0;
+
+    EEADRL = (startAddr & 0xFF);
+
+    EEADRH = ((startAddr & 0xFF00) >> 8);
 
 
-        T1CONbits.TMR1ON =1;
-    }
-    else
+    EECON1bits.CFGS = 0;
+    EECON1bits.EEPGD = 1;
+    EECON1bits.FREE = 1;
+    EECON1bits.WREN = 1;
+
+
+    EECON2 = 0x55;
+    EECON2 = 0xAA;
+    EECON1bits.WR = 1;
+    __nop();
+    __nop();
+
+    EECON1bits.WREN = 0;
+    INTCONbits.GIE = GIEBitValue;
+}
+
+
+
+
+
+void DATAEE_WriteByte(uint8_t bAdd, uint8_t bData)
+{
+    uint8_t GIEBitValue = 0;
+
+    EEADRL = (uint8_t)(bAdd & 0x0ff);
+    EEDATL = bData;
+    EECON1bits.EEPGD = 0;
+    EECON1bits.CFGS = 0;
+    EECON1bits.WREN = 1;
+
+    GIEBitValue = INTCONbits.GIE;
+    INTCONbits.GIE = 0;
+    EECON2 = 0x55;
+    EECON2 = 0xAA;
+    EECON1bits.WR = 1;
+
+    while (EECON1bits.WR)
     {
-
-        TMR1H = (uint8_t)(timerVal >> 8);
-        TMR1L = (uint8_t)timerVal;
     }
+
+    EECON1bits.WREN = 0;
+    INTCONbits.GIE = GIEBitValue;
 }
 
-void TMR1_Reload(void)
+uint8_t DATAEE_ReadByte(uint8_t bAdd)
 {
-    TMR1_WriteTimer(timer1ReloadVal);
-}
+    EEADRL = (uint8_t)(bAdd & 0x0ff);
+    EECON1bits.CFGS = 0;
+    EECON1bits.EEPGD = 0;
+    EECON1bits.RD = 1;
+    __nop();
+    __nop();
 
-void TMR1_StartSinglePulseAcquisition(void)
-{
-    T1GCONbits.T1GGO = 1;
-}
-
-uint8_t TMR1_CheckGateValueStatus(void)
-{
-    return (T1GCONbits.T1GVAL);
-}
-
-void TMR1_ISR(void)
-{
-
-
-    PIR1bits.TMR1IF = 0;
-    TMR1_WriteTimer(timer1ReloadVal);
-
-
-
-    TMR1_CallBack();
-}
-
-void TMR1_CallBack(void)
-{
-
-    if(TMR1_InterruptHandler)
-    {
-        TMR1_InterruptHandler();
-    }
-}
-
-void TMR1_SetInterruptHandler(void (* InterruptHandler)(void)){
-    TMR1_InterruptHandler = InterruptHandler;
-}
-
-void TMR1_DefaultInterruptHandler(void){
-
-
+    return (EEDATL);
 }

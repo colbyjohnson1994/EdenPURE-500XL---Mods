@@ -24,31 +24,34 @@ extern "C" {
         HEAT_MODE_0 = 0,    // off mode
         HEAT_MODE_1 = 1,
         HEAT_MODE_2 = 2,
-        HEAT_MODE_3 = 2,
-        HEAT_MODE_4 = 2,
-        HEAT_MODE_5 = 2,
+        HEAT_MODE_3 = 3,
+        HEAT_MODE_4 = 4,
+        HEAT_MODE_5 = 5,
     };
     
     // current mode is read from eeprom on startup to resume
     // last state heater was in before shut down
     int CURRENT_MODE = HEAT_MODE_0;
     int DISP_STATE = DISP_STATE_1;
+    bool RELAY_STATUS = false;
+    
+    bool _LastUpState = true; // default to last state was clicked
+    bool _LastDownState = false; // default to last state was clicked
+    
+    // eusart display
+    char displayString[16];
     
     // all setpoints are in degrees F
-    const float SETPOINTS[5] = {65.0, 68.0, 71.0, 74.0, 77.0};
+    const int SETPOINTS[5] = {65, 68, 71, 74, 77};
     
     // in degrees F, temperature above setpoint the heat will shut off
-    const float SHUT_OFF = 2.0;
+    const int SHUT_OFF = 2;
     
     // in degrees F, temperature below setpoint the heat will turn back on
-    const float TURN_ON = 2.0;
+    const int TURN_ON = 1;
     
     // global averaged temperature
-    float TEMP;
-    
-    // number of samples that our average is sampled from
-    const int AVERAGE_SIZE = 10;
-    float TEMP_READINGS[AVERAGE_SIZE];
+    int TEMP = 0;
     
     // reading iterator is used to keep track of our position in the readings array
     int READING_ITER = 0;
@@ -76,6 +79,19 @@ extern "C" {
     // tick count that keep track of how many times logic control ISR has ticked
     // this is reset once 1 second is hit
     uint8_t LOGIC_TICK = 0;
+    
+#define DEBUG       1   // whether or not debugging information is sent out on console port
+#define READ_PERIOD 3   // number of 100ms ticks often we read from the sensor
+#define UART_PERIOD 5   // number of 100ms ticks often we send data out on console
+    
+    bool READ_FLAG = false;     // read/average from sensor flag
+    bool UART_FLAG = false;     // send uart data flag
+    bool LOGIC_FLAG = false;    // control heating logic flag
+    
+    // Steinhart-Hart coefficients for a 5k NTC thermistor
+    const float A = 1.009249522e-03;
+    const float B = 2.378405444e-04;
+    const float C = 2.019202697e-07;
 
 #ifdef	__cplusplus
 }

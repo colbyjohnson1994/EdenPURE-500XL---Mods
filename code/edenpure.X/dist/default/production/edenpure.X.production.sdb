@@ -10,26 +10,100 @@ channel_Temp 29
 channel_DAC 30
 channel_FVR 31
 ]
+"34 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X/variables.h
+[e E2916 . `uc
+HEAT_MODE_0 0
+HEAT_MODE_1 1
+HEAT_MODE_2 2
+HEAT_MODE_3 3
+HEAT_MODE_4 4
+HEAT_MODE_5 5
+]
+"35
+[e E2912 . `uc
+DISP_STATE_1 0
+DISP_STATE_2 1
+DISP_STATE_3 2
+]
+"281 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+[e E2856 . `uc
+NTC 6
+channel_Temp 29
+channel_DAC 30
+channel_FVR 31
+]
+"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"43 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
 "10 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
+"242
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\Umul8_16.c
 [v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
 "6 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\pic\__eeprom.c
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"49 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+"51 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [v _main main `(v  1 e 1 0 ]
+"132
+[v __UIControlISR _UIControlISR `(v  1 e 1 0 ]
+"260
+[v __LogicControlISR _LogicControlISR `(v  1 e 1 0 ]
+"278
+[v __ReadSensor _ReadSensor `(v  1 e 1 0 ]
+"300
+[v __ControlHeat _ControlHeat `(v  1 e 1 0 ]
+"335
+[v __SendDataToConsole _SendDataToConsole `(v  1 e 1 0 ]
+"366
+[v _WriteString WriteString `(v  1 e 1 0 ]
+"378
+[v _approximateLog approximateLog `(f  1 e 4 0 ]
 "67 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/adc.c
 [v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
+"112
+[v _ADC_GetConversion ADC_GetConversion `(us  1 e 2 0 ]
+"66 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/eusart.c
+[v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
+"132
+[v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
+"144
+[v _EUSART_DefaultFramingErrorHandler EUSART_DefaultFramingErrorHandler `(v  1 e 1 0 ]
+"146
+[v _EUSART_DefaultOverrunErrorHandler EUSART_DefaultOverrunErrorHandler `(v  1 e 1 0 ]
+"154
+[v _EUSART_DefaultErrorHandler EUSART_DefaultErrorHandler `(v  1 e 1 0 ]
+"157
+[v _EUSART_SetFramingErrorHandler EUSART_SetFramingErrorHandler `(v  1 e 1 0 ]
+"161
+[v _EUSART_SetOverrunErrorHandler EUSART_SetOverrunErrorHandler `(v  1 e 1 0 ]
+"165
+[v _EUSART_SetErrorHandler EUSART_SetErrorHandler `(v  1 e 1 0 ]
 "52 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 "50 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
-"61
+"62
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
-"71
+"72
 [v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
+"58 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/memory.c
+[v _FLASH_ReadWord FLASH_ReadWord `(us  1 e 2 0 ]
+"95
+[v _FLASH_WriteBlock FLASH_WriteBlock `(c  1 e 1 0 ]
+"156
+[v _FLASH_EraseBlock FLASH_EraseBlock `(v  1 e 1 0 ]
 "55 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 "64 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/tmr0.c
@@ -48,13 +122,39 @@ channel_FVR 31
 [v _TMR1_WriteTimer TMR1_WriteTimer `(v  1 e 1 0 ]
 "157
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
-"176
+"169
 [v _TMR1_CallBack TMR1_CallBack `(v  1 e 1 0 ]
-"185
+"178
 [v _TMR1_SetInterruptHandler TMR1_SetInterruptHandler `(v  1 e 1 0 ]
-"189
+"182
 [v _TMR1_DefaultInterruptHandler TMR1_DefaultInterruptHandler `(v  1 e 1 0 ]
-[s S186 . 1 `uc 1 IOCIF 1 0 :1:0 
+"34 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X/variables.h
+[v _CURRENT_MODE CURRENT_MODE `i  1 e 2 0 ]
+"35
+[v _DISP_STATE DISP_STATE `i  1 e 2 0 ]
+"36
+[v _RELAY_STATUS RELAY_STATUS `a  1 e 1 0 ]
+"38
+[v __LastUpState _LastUpState `a  1 e 1 0 ]
+"39
+[v __LastDownState _LastDownState `a  1 e 1 0 ]
+"42
+[v _displayString displayString `[16]uc  1 e 16 0 ]
+"45
+[v _SETPOINTS SETPOINTS `DC[5]i  1 e 10 0 ]
+"54
+[v _TEMP TEMP `i  1 e 2 0 ]
+"73
+[v _HEAT_CALL_TICKS HEAT_CALL_TICKS `us  1 e 2 0 ]
+"81
+[v _LOGIC_TICK LOGIC_TICK `uc  1 e 1 0 ]
+"87
+[v _READ_FLAG READ_FLAG `a  1 e 1 0 ]
+"88
+[v _UART_FLAG UART_FLAG `a  1 e 1 0 ]
+"89
+[v _LOGIC_FLAG LOGIC_FLAG `a  1 e 1 0 ]
+[s S181 . 1 `uc 1 IOCIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 IOCIE 1 0 :1:3 
@@ -64,14 +164,38 @@ channel_FVR 31
 `uc 1 GIE 1 0 :1:7 
 ]
 "375 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\pic\include\proc\pic16f1827.h
-[s S195 . 1 `uc 1 . 1 0 :2:0 
+[s S190 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 T0IE 1 0 :1:5 
 ]
-[u S200 . 1 `S186 1 . 1 0 `S195 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES200  1 e 1 @11 ]
-[s S301 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S195 . 1 `S181 1 . 1 0 `S190 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES195  1 e 1 @11 ]
+[s S807 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+"447
+[u S816 . 1 `S807 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES816  1 e 1 @12 ]
+[s S828 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"509
+[u S837 . 1 `S828 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES837  1 e 1 @13 ]
+[s S296 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSP1IF 1 0 :1:3 
@@ -81,8 +205,8 @@ channel_FVR 31
 `uc 1 TMR1GIF 1 0 :1:7 
 ]
 "571
-[u S310 . 1 `S301 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES310  1 e 1 @17 ]
+[u S305 . 1 `S296 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES305  1 e 1 @17 ]
 "733
 [v _TMR0 TMR0 `VEuc  1 e 1 @21 ]
 "760
@@ -91,7 +215,7 @@ channel_FVR 31
 [v _TMR1H TMR1H `VEuc  1 e 1 @23 ]
 "800
 [v _T1CON T1CON `VEuc  1 e 1 @24 ]
-[s S387 . 1 `uc 1 TMR1ON 1 0 :1:0 
+[s S382 . 1 `uc 1 TMR1ON 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 nT1SYNC 1 0 :1:2 
 `uc 1 T1OSCEN 1 0 :1:3 
@@ -101,15 +225,15 @@ channel_FVR 31
 `uc 1 TMR1CS1 1 0 :1:7 
 ]
 "822
-[s S396 . 1 `uc 1 . 1 0 :4:0 
+[s S391 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 T1CKPS 1 0 :2:4 
 `uc 1 TMR1CS 1 0 :2:6 
 ]
-[u S400 . 1 `S387 1 . 1 0 `S396 1 . 1 0 ]
-[v _T1CONbits T1CONbits `VES400  1 e 1 @24 ]
+[u S395 . 1 `S382 1 . 1 0 `S391 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES395  1 e 1 @24 ]
 "872
 [v _T1GCON T1GCON `VEuc  1 e 1 @25 ]
-[s S417 . 1 `uc 1 T1GSS0 1 0 :1:0 
+[s S412 . 1 `uc 1 T1GSS0 1 0 :1:0 
 `uc 1 T1GSS1 1 0 :1:1 
 `uc 1 T1GVAL 1 0 :1:2 
 `uc 1 T1GGO 1 0 :1:3 
@@ -119,15 +243,39 @@ channel_FVR 31
 `uc 1 TMR1GE 1 0 :1:7 
 ]
 "892
-[s S426 . 1 `uc 1 T1GSS 1 0 :2:0 
+[s S421 . 1 `uc 1 T1GSS 1 0 :2:0 
 ]
-[u S428 . 1 `S417 1 . 1 0 `S426 1 . 1 0 ]
-[v _T1GCONbits T1GCONbits `VES428  1 e 1 @25 ]
+[u S423 . 1 `S412 1 . 1 0 `S421 1 . 1 0 ]
+[v _T1GCONbits T1GCONbits `VES423  1 e 1 @25 ]
 "1153
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
+[s S870 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1170
+[u S879 . 1 `S870 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES879  1 e 1 @140 ]
 "1215
 [v _TRISB TRISB `VEuc  1 e 1 @141 ]
-[s S280 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S891 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"1232
+[u S900 . 1 `S891 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES900  1 e 1 @141 ]
+[s S275 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSP1IE 1 0 :1:3 
@@ -137,11 +285,11 @@ channel_FVR 31
 `uc 1 TMR1GIE 1 0 :1:7 
 ]
 "1294
-[u S289 . 1 `S280 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES289  1 e 1 @145 ]
+[u S284 . 1 `S275 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES284  1 e 1 @145 ]
 "1456
 [v _OPTION_REG OPTION_REG `VEuc  1 e 1 @149 ]
-[s S39 . 1 `uc 1 PS0 1 0 :1:0 
+[s S30 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 `uc 1 PS2 1 0 :1:2 
 `uc 1 PSA 1 0 :1:3 
@@ -151,13 +299,13 @@ channel_FVR 31
 `uc 1 nWPUEN 1 0 :1:7 
 ]
 "1479
-[s S48 . 1 `uc 1 PS 1 0 :3:0 
+[s S39 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 . 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
 ]
-[u S53 . 1 `S39 1 . 1 0 `S48 1 . 1 0 ]
-[v _OPTION_REGbits OPTION_REGbits `VES53  1 e 1 @149 ]
+[u S44 . 1 `S30 1 . 1 0 `S39 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES44  1 e 1 @149 ]
 "1590
 [v _WDTCON WDTCON `VEuc  1 e 1 @151 ]
 "1649
@@ -170,7 +318,7 @@ channel_FVR 31
 [v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
 "1888
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
-[s S122 . 1 `uc 1 ADON 1 0 :1:0 
+[s S117 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -179,21 +327,45 @@ channel_FVR 31
 `uc 1 CHS4 1 0 :1:6 
 ]
 "1913
-[s S130 . 1 `uc 1 . 1 0 :1:0 
+[s S125 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 ADGO 1 0 :1:1 
 `uc 1 CHS 1 0 :5:2 
 ]
-[s S134 . 1 `uc 1 . 1 0 :1:0 
+[s S129 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 ]
-[u S137 . 1 `S122 1 . 1 0 `S130 1 . 1 0 `S134 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES137  1 e 1 @157 ]
+[u S132 . 1 `S117 1 . 1 0 `S125 1 . 1 0 `S129 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES132  1 e 1 @157 ]
 "1968
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
 "2040
 [v _LATA LATA `VEuc  1 e 1 @268 ]
+[s S786 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 LATA6 1 0 :1:6 
+`uc 1 LATA7 1 0 :1:7 
+]
+"2057
+[u S795 . 1 `S786 1 . 1 0 ]
+[v _LATAbits LATAbits `VES795  1 e 1 @268 ]
 "2097
 [v _LATB LATB `VEuc  1 e 1 @269 ]
+[s S849 . 1 `uc 1 LATB0 1 0 :1:0 
+`uc 1 LATB1 1 0 :1:1 
+`uc 1 LATB2 1 0 :1:2 
+`uc 1 LATB3 1 0 :1:3 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"2114
+[u S858 . 1 `S849 1 . 1 0 ]
+[v _LATBbits LATBbits `VES858  1 e 1 @269 ]
 "2431
 [v _BORCON BORCON `VEuc  1 e 1 @278 ]
 "2780
@@ -204,10 +376,84 @@ channel_FVR 31
 [v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
 "2914
 [v _ANSELB ANSELB `VEuc  1 e 1 @397 ]
+"2986
+[v _EEADRL EEADRL `VEuc  1 e 1 @401 ]
+"3006
+[v _EEADRH EEADRH `VEuc  1 e 1 @402 ]
+"3033
+[v _EEDATL EEDATL `VEuc  1 e 1 @403 ]
+"3071
+[v _EEDATH EEDATH `VEuc  1 e 1 @404 ]
+[s S654 . 1 `uc 1 RD 1 0 :1:0 
+`uc 1 WR 1 0 :1:1 
+`uc 1 WREN 1 0 :1:2 
+`uc 1 WRERR 1 0 :1:3 
+`uc 1 FREE 1 0 :1:4 
+`uc 1 LWLO 1 0 :1:5 
+`uc 1 CFGS 1 0 :1:6 
+`uc 1 EEPGD 1 0 :1:7 
+]
+"3108
+[u S663 . 1 `S654 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES663  1 e 1 @405 ]
+"3153
+[v _EECON2 EECON2 `VEuc  1 e 1 @406 ]
+"3173
+[v _RCREG RCREG `VEuc  1 e 1 @409 ]
+"3193
+[v _TXREG TXREG `VEuc  1 e 1 @410 ]
+"3229
+[v _SPBRGL SPBRGL `VEuc  1 e 1 @411 ]
+"3279
+[v _SPBRGH SPBRGH `VEuc  1 e 1 @412 ]
+"3312
+[v _RCSTA RCSTA `VEuc  1 e 1 @413 ]
+[s S561 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"3329
+[u S570 . 1 `S561 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES570  1 e 1 @413 ]
+"3374
+[v _TXSTA TXSTA `VEuc  1 e 1 @414 ]
+[s S540 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"3391
+[u S549 . 1 `S540 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES549  1 e 1 @414 ]
+"3436
+[v _BAUDCON BAUDCON `VEuc  1 e 1 @415 ]
 "3488
 [v _WPUA WPUA `VEuc  1 e 1 @524 ]
 "3517
 [v _WPUB WPUB `VEuc  1 e 1 @525 ]
+[s S482 . 1 `uc 1 perr 1 0 :1:0 
+`uc 1 ferr 1 0 :1:1 
+`uc 1 oerr 1 0 :1:2 
+`uc 1 reserved 1 0 :5:3 
+]
+"52 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/eusart.c
+[u S487 . 1 `S482 1 . 1 0 `uc 1 status 1 0 ]
+[v _eusartRxLastError eusartRxLastError `VES487  1 e 1 0 ]
+"58
+[v _EUSART_FramingErrorHandler EUSART_FramingErrorHandler `*.37(v  1 e 2 0 ]
+"59
+[v _EUSART_OverrunErrorHandler EUSART_OverrunErrorHandler `*.37(v  1 e 2 0 ]
+"60
+[v _EUSART_ErrorHandler EUSART_ErrorHandler `*.37(v  1 e 2 0 ]
 "58 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/tmr0.c
 [v _timer0ReloadVal timer0ReloadVal `VEuc  1 e 1 0 ]
 "59
@@ -216,31 +462,240 @@ channel_FVR 31
 [v _timer1ReloadVal timer1ReloadVal `VEus  1 e 2 0 ]
 "58
 [v _TMR1_InterruptHandler TMR1_InterruptHandler `*.37(v  1 e 2 0 ]
-"49 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+"51 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"73
+"76
+[v main@savedRelay savedRelay `a  1 a 1 77 ]
+"128
+} 0
+"335
+[v __SendDataToConsole _SendDataToConsole `(v  1 e 1 0 ]
+{
+"339
+[v __SendDataToConsole@huns huns `i  1 a 2 18 ]
+[v __SendDataToConsole@tens tens `i  1 a 2 16 ]
+[v __SendDataToConsole@ones ones `i  1 a 2 14 ]
+"364
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 0 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 3 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 5 ]
+"53
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 8 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 7 ]
+[v ___awdiv@counter counter `uc  1 a 1 6 ]
+"5
+[v ___awdiv@divisor divisor `i  1 p 2 2 ]
+[v ___awdiv@dividend dividend `i  1 p 2 4 ]
+"41
+} 0
+"366 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+[v _WriteString WriteString `(v  1 e 1 0 ]
+{
+[v WriteString@input input `*.5uc  1 a 1 wreg ]
+"368
+[v WriteString@i i `i  1 a 2 5 ]
+"366
+[v WriteString@input input `*.5uc  1 a 1 wreg ]
+"368
+[v WriteString@input input `*.5uc  1 a 1 7 ]
+"375
+} 0
+"132 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/eusart.c
+[v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
+{
+[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
+[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
+[v EUSART_Write@txData txData `uc  1 a 1 3 ]
+"139
+} 0
+"278 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+[v __ReadSensor _ReadSensor `(v  1 e 1 0 ]
+{
+"290
+[v __ReadSensor@logR logR `f  1 a 4 50 ]
+"296
+[v __ReadSensor@Tf Tf `f  1 a 4 28 ]
+"295
+[v __ReadSensor@Tc Tc `f  1 a 4 24 ]
+"294
+[v __ReadSensor@T T `f  1 a 4 20 ]
+"293
+[v __ReadSensor@invT invT `f  1 a 4 16 ]
+"287
+[v __ReadSensor@Rntc Rntc `f  1 a 4 12 ]
+"286
+[v __ReadSensor@Vcc Vcc `f  1 a 4 8 ]
+"285
+[v __ReadSensor@Rpullup Rpullup `f  1 a 4 4 ]
+"282
+[v __ReadSensor@Vout Vout `f  1 a 4 0 ]
+"281
+[v __ReadSensor@adcValue adcValue `us  1 a 2 48 ]
+"299
+} 0
+"378
+[v _approximateLog approximateLog `(f  1 e 4 0 ]
+{
+"379
+[v approximateLog@y y `f  1 a 4 20 ]
+"378
+[v approximateLog@x x `f  1 p 4 8 ]
+"381
+} 0
+"242 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcadd.c
+[v ___flsub __flsub `(d  1 e 4 0 ]
+{
+[v ___flsub@a a `d  1 p 4 0 ]
+[v ___flsub@b b `d  1 p 4 4 ]
+"250
+} 0
+"10
+[v ___fladd __fladd `(d  1 e 4 0 ]
+{
+"17
+[v ___fladd@grs grs `uc  1 a 1 50 ]
+"15
+[v ___fladd@bexp bexp `uc  1 a 1 49 ]
+"16
+[v ___fladd@aexp aexp `uc  1 a 1 48 ]
+"13
+[v ___fladd@signs signs `uc  1 a 1 47 ]
+"10
+[v ___fladd@b b `d  1 p 4 31 ]
+[v ___fladd@a a `d  1 p 4 35 ]
+"237
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+{
+[s S1315 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+"13
+[s S1320 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S1323 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1315 1 fAsBytes 4 0 `S1320 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S1323  1 a 4 71 ]
+"12
+[v ___flmul@grs grs `ul  1 a 4 66 ]
+[s S1392 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+"14
+[u S1395 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1392 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1395  1 a 2 75 ]
+"10
+[v ___flmul@bexp bexp `uc  1 a 1 70 ]
+"11
+[v ___flmul@aexp aexp `uc  1 a 1 65 ]
+"9
+[v ___flmul@sign sign `uc  1 a 1 64 ]
+"8
+[v ___flmul@b b `d  1 p 4 51 ]
+[v ___flmul@a a `d  1 p 4 55 ]
+"205
+} 0
+"4 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+{
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+"6
+[v __Umul8_16@word_mpld word_mpld `ui  1 a 2 2 ]
+"5
+[v __Umul8_16@product product `ui  1 a 2 0 ]
+"4
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+[v __Umul8_16@multiplicand multiplicand `uc  1 p 1 3 ]
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 4 ]
+"60
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+{
+"21
+[v ___fldiv@grs grs `ul  1 a 4 25 ]
+"22
+[v ___fldiv@rem rem `ul  1 a 4 18 ]
+"20
+[v ___fldiv@new_exp new_exp `i  1 a 2 23 ]
+"19
+[v ___fldiv@aexp aexp `uc  1 a 1 30 ]
+"18
+[v ___fldiv@bexp bexp `uc  1 a 1 29 ]
+"16
+[v ___fldiv@sign sign `uc  1 a 1 22 ]
+"8
+[v ___fldiv@a a `d  1 p 4 5 ]
+[v ___fldiv@b b `d  1 p 4 9 ]
+"185
+} 0
+"10 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+{
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+"13
+[v ___xxtofl@arg arg `ul  1 a 4 6 ]
+"12
+[v ___xxtofl@exp exp `uc  1 a 1 5 ]
+"10
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+[v ___xxtofl@val val `l  1 p 4 3 ]
+"15
+[v ___xxtofl@sign sign `uc  1 a 1 4 ]
+"44
+} 0
+"43 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+{
+"45
+[v ___fltol@exp1 exp1 `uc  1 a 1 5 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 4 ]
+"43
+[v ___fltol@f1 f1 `d  1 p 4 3 ]
+"70
+} 0
+"112 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/adc.c
+[v _ADC_GetConversion ADC_GetConversion `(us  1 e 2 0 ]
+{
+[v ADC_GetConversion@channel channel `E2485  1 a 1 wreg ]
+[v ADC_GetConversion@channel channel `E2485  1 a 1 wreg ]
+"115
+[v ADC_GetConversion@channel channel `E2485  1 a 1 6 ]
+"133
+} 0
+"300 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+[v __ControlHeat _ControlHeat `(v  1 e 1 0 ]
+{
+"333
 } 0
 "50 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
-"59
+"60
 } 0
-"71
+"72
 [v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
 {
-"75
+"76
 } 0
 "64 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/tmr1.c
 [v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
 {
 "91
 } 0
-"185
+"178
 [v _TMR1_SetInterruptHandler TMR1_SetInterruptHandler `(v  1 e 1 0 ]
 {
-[v TMR1_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 0 ]
-"187
+[v TMR1_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 3 ]
+"180
 } 0
 "64 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/tmr0.c
 [v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
@@ -250,7 +705,7 @@ channel_FVR 31
 "133
 [v _TMR0_SetInterruptHandler TMR0_SetInterruptHandler `(v  1 e 1 0 ]
 {
-[v TMR0_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 0 ]
+[v TMR0_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 3 ]
 "135
 } 0
 "55 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/pin_manager.c
@@ -258,10 +713,33 @@ channel_FVR 31
 {
 "94
 } 0
-"61 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/mcc.c
+"62 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/mcc.c
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
-"69
+"70
+} 0
+"66 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/eusart.c
+[v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
+{
+"92
+} 0
+"161
+[v _EUSART_SetOverrunErrorHandler EUSART_SetOverrunErrorHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetOverrunErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 3 ]
+"163
+} 0
+"157
+[v _EUSART_SetFramingErrorHandler EUSART_SetFramingErrorHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetFramingErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 3 ]
+"159
+} 0
+"165
+[v _EUSART_SetErrorHandler EUSART_SetErrorHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 3 ]
+"167
 } 0
 "67 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/adc.c
 [v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
@@ -276,9 +754,7 @@ channel_FVR 31
 "157 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/tmr1.c
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
 {
-"159
-[v TMR1_ISR@CountCallBack CountCallBack `VEui  1 s 2 CountCallBack ]
-"174
+"167
 } 0
 "120
 [v _TMR1_WriteTimer TMR1_WriteTimer `(v  1 e 1 0 ]
@@ -286,15 +762,20 @@ channel_FVR 31
 [v TMR1_WriteTimer@timerVal timerVal `us  1 p 2 0 ]
 "140
 } 0
-"176
+"169
 [v _TMR1_CallBack TMR1_CallBack `(v  1 e 1 0 ]
 {
-"183
+"176
 } 0
-"189
+"182
 [v _TMR1_DefaultInterruptHandler TMR1_DefaultInterruptHandler `(v  1 e 1 0 ]
 {
-"192
+"185
+} 0
+"260 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+[v __LogicControlISR _LogicControlISR `(v  1 e 1 0 ]
+{
+"276
 } 0
 "108 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/tmr0.c
 [v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
@@ -310,4 +791,12 @@ channel_FVR 31
 [v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
 {
 "140
+} 0
+"132 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+[v __UIControlISR _UIControlISR `(v  1 e 1 0 ]
+{
+"134
+[v __UIControlISR@btnDnRead btnDnRead `a  1 a 1 2 ]
+[v __UIControlISR@btnUpRead btnUpRead `a  1 a 1 1 ]
+"255
 } 0

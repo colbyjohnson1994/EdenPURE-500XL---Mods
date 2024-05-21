@@ -42,6 +42,8 @@
 */
 
 #include "mcc_generated_files/mcc.h"
+#include "functions.h"
+#include "variables.h"
 
 /*
                          Main application
@@ -55,10 +57,10 @@ void main(void)
     // Use the following macros to:
 
     // Enable the Global Interrupts
-    //INTERRUPT_GlobalInterruptEnable();
+    INTERRUPT_GlobalInterruptEnable();
 
     // Enable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptEnable();
+    INTERRUPT_PeripheralInterruptEnable();
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
@@ -66,10 +68,316 @@ void main(void)
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
 
+    TMR0_SetInterruptHandler(_UIControlISR);
+    TMR1_SetInterruptHandler(_LogicControlISR);
+    
     while (1)
     {
-        // Add your application code
+        bool savedRelay;
+        
+        // monitor flags set by the ISR's
+        if (READ_FLAG)
+        {
+            READ_FLAG = false;
+            _ReadSensor();
+        }
+        
+        if (UART_FLAG)
+        {
+            UART_FLAG = false;
+            if (DEBUG)
+                _SendDataToConsole();
+        }
+        
+        if (LOGIC_FLAG)
+        {
+            LOGIC_FLAG = false;
+            
+            savedRelay = RELAY_STATUS;
+            
+            // keep track of time unit has been off or on
+            HEAT_CALL_TICKS++;
+            if (RELAY_STATUS)
+            {
+                // cap heat call ticks at min run time
+                if (HEAT_CALL_TICKS > (MIN_RUN_TIME * 60))
+                    HEAT_CALL_TICKS = MIN_RUN_TIME * 60;
+            }
+            else
+            {
+                // cap heat call ticks at min idle time
+                if (HEAT_CALL_TICKS > (MIN_IDLE_TIME * 60))
+                    HEAT_CALL_TICKS = MIN_IDLE_TIME * 60;
+            }
+            
+            // control the heating logic
+            _ControlHeat();
+            
+            if (savedRelay != RELAY_STATUS)
+            {
+                // reset timer
+                HEAT_CALL_TICKS = 0;
+            }
+            
+            if (RELAY_STATUS)
+                HEAT_RL_SetHigh();
+            else
+                HEAT_RL_SetLow();
+        }
     }
+}
+
+// this function handles the 3 states that we need to display LED status and handle
+// button clicks from the UI. 
+void _UIControlISR()
+{
+    bool btnUpRead, btnDnRead;
+    
+    // this ISR is called once every 10ms
+    switch(DISP_STATE)
+    {         
+        case DISP_STATE_1:
+            // read buttons in this state
+            btnUpRead = LED2_5N_GetValue();
+            btnDnRead = LED3_4N_GetValue();
+            
+            if (!btnUpRead)
+            {
+                // button clicked right now
+                if (_LastUpState)
+                {
+                    // last time we measured it wasn't clicked
+                    // trigger a btn click
+                    if (CURRENT_MODE > HEAT_MODE_0)
+                        CURRENT_MODE--;
+                    
+                    // trigger buzzer
+                    
+                }
+                else
+                {
+                    // do nothing we haven't released the button yet
+                }
+            }
+            
+            // set last state
+            _LastUpState = btnUpRead;
+            
+            if (!btnDnRead)
+            {
+                // button clicked right now
+                if (_LastDownState)
+                {
+                    // last time we measured it wasn't clicked
+                    // trigger a btn click
+                    if (CURRENT_MODE < HEAT_MODE_5)
+                        CURRENT_MODE++;
+                    
+                    // trigger buzzer
+                    
+                }
+                else
+                {
+                    // do nothing we haven't released the button yet
+                }
+            }
+            
+            // set last state
+            _LastDownState = btnDnRead;
+            
+            // setup state for DISP_STATE_2
+            DISP_STATE = DISP_STATE_2;
+            
+            LED2_3P_SetHigh();
+            LED4_5P_SetLow();
+            
+            // set led 2 and 3 states based on heat mode
+            if (CURRENT_MODE > HEAT_MODE_1)
+            {
+                LED2_5N_SetLow();
+                
+                if (CURRENT_MODE > HEAT_MODE_2)
+                    LED3_4N_SetLow();
+                else
+                    LED3_4N_SetHigh();
+            }
+            else
+            {
+                LED2_5N_SetHigh();
+                LED3_4N_SetHigh();
+            }
+            
+            // only want led on for one state
+            LED1_N_SetHigh();
+            
+            break;
+        case DISP_STATE_2:
+            // setup state for DISP_STATE_3
+            DISP_STATE = DISP_STATE_3;
+            
+            LED2_3P_SetLow();
+            LED4_5P_SetHigh();
+            
+            // set led 4 and 5 states based on heat mode
+            if (CURRENT_MODE > HEAT_MODE_3)
+            {
+                LED3_4N_SetLow();
+                
+                if (CURRENT_MODE > HEAT_MODE_4)
+                    LED2_5N_SetLow();
+                else
+                    LED2_5N_SetHigh();
+            }
+            else
+            {
+                LED2_5N_SetHigh();
+                LED3_4N_SetHigh();
+            }
+            
+            break;
+        case DISP_STATE_3:
+            // setup state for DISP_STATE_1
+            DISP_STATE = DISP_STATE_1;
+            
+            LED2_5N_SetDigitalInput();
+            LED3_4N_SetDigitalInput();
+            
+            if (CURRENT_MODE > HEAT_MODE_0)
+                LED1_N_SetLow();
+            else
+                LED1_N_SetHigh();
+            break;
+            
+        default:
+            // incase we end up here, reset to default state
+            DISP_STATE = DISP_STATE_1;
+    }
+}
+
+// this function handles setting flags that are monitored in the main while loop
+// flags are set when we need to read and control the heating logic
+// when debug is enabled, data is sent out over the console port periodically
+void _LogicControlISR()
+{
+    // this ISR is called once every 100ms
+    LOGIC_TICK++;
+    
+    if (LOGIC_TICK >= READ_PERIOD)
+        READ_FLAG = true;
+    
+    if (LOGIC_TICK >= UART_PERIOD)
+        UART_FLAG = true;
+    
+    if (LOGIC_TICK >= ONE_SECOND)
+    {
+        LOGIC_FLAG = true;
+        LOGIC_TICK = 0; // reset counter
+    }
+}
+
+void _ReadSensor()
+{
+    // Read the ADC value
+    uint16_t adcValue = ADC_GetConversion(NTC);
+    float Vout = adcValue * (5.0f / 1023.0f); // Convert ADC value to voltage
+    
+    // Calculate the thermistor resistance
+    float Rpullup = 10000.0;
+    float Vcc = 5.0;
+    float Rntc = Rpullup * (Vcc / Vout - 1.0f);
+
+    // Calculate approximate logarithm of the resistance
+    float logR = approximateLog(Rntc / 5000.0f); // Normalize Rntc by 5000 (the nominal resistance)
+
+    // Calculate temperature using the Steinhart-Hart equation with the approximate log
+    float invT = A + B * logR + C * logR * logR * logR;
+    float T = 1.0f / invT; // Temperature in Kelvin
+    float Tc = T - 273.15f; // Convert Kelvin to Celsius
+    float Tf = (1.8f * Tc) + 32.0f;
+    
+    TEMP = (int)Tf;
+}
+void _ControlHeat()
+{
+    if (CURRENT_MODE == HEAT_MODE_0)
+    {
+        RELAY_STATUS = false;
+        return;
+    }
+    
+    // if we are above our setpoint + shut off and our heater has run
+    // long enough, shut down
+    if (TEMP > (SETPOINTS[CURRENT_MODE] + SHUT_OFF))
+    {
+        if (HEAT_CALL_TICKS > (MIN_RUN_TIME * 60))
+        {
+            RELAY_STATUS = false;
+            return;
+        }
+        
+        // do nothing we cant shut down yet
+    }
+    
+    if (TEMP < (SETPOINTS[CURRENT_MODE] - TURN_ON))
+    {
+        // we are below our setpoint
+        // check if we have been off long enough
+        if (HEAT_CALL_TICKS > (MIN_IDLE_TIME * 60))
+        {
+            RELAY_STATUS = true;
+            return;
+        }
+        
+        // do nothing we can't turn on yet
+    }
+}
+    
+void _SendDataToConsole()
+{
+    // sprintf is too expensive
+    // take all of our variables and display them to console for debugging
+    int huns, tens, ones;
+    
+    huns = TEMP / 100;
+    tens = (TEMP - huns * 100) / 10;
+    ones = (TEMP - huns * 100 - tens * 10);
+    
+    // current temp
+    displayString[0] = 'T';
+    displayString[1] = ':';
+    displayString[2] = huns + 48;
+    displayString[3] = tens + 48;
+    displayString[4] = ones + 48;
+    displayString[5] = '\t';
+    displayString[6] = 'M';
+    displayString[7] = ':';
+    displayString[8] = CURRENT_MODE + 48;
+    displayString[9] = '\t';
+    displayString[10] = 'H';
+    displayString[11] = ':';
+    displayString[12] = RELAY_STATUS + 48;
+    displayString[13] = '\r';
+    displayString[14] = '\n';
+    displayString[15] = '\0';
+    
+    WriteString(displayString);
+}
+
+void WriteString(char * input)
+{
+    int i = 0; // Initialize an index variable
+
+    while (input[i] != '\0')
+    {
+        EUSART_Write(input[i]);
+        i++;
+    }
+}
+
+// Simple logarithm approximation
+float approximateLog(float x) {
+    float y = x - 1.0f;
+    return y - (y * y) / 2.0f + (y * y * y) / 3.0f;
 }
 /**
  End of File

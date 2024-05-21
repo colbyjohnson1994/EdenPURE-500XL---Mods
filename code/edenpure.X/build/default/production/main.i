@@ -4333,9 +4333,9 @@ extern __bank0 __bit __timeout;
 # 50 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/pin_manager.h" 1
-# 233 "./mcc_generated_files/pin_manager.h"
-void PIN_MANAGER_Initialize (void);
 # 245 "./mcc_generated_files/pin_manager.h"
+void PIN_MANAGER_Initialize (void);
+# 257 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
 # 51 "./mcc_generated_files/mcc.h" 2
 
@@ -4502,6 +4502,21 @@ char *tempnam(const char *, const char *);
 # 1 "./mcc_generated_files/interrupt_manager.h" 1
 # 55 "./mcc_generated_files/mcc.h" 2
 
+# 1 "./mcc_generated_files/memory.h" 1
+# 99 "./mcc_generated_files/memory.h"
+uint16_t FLASH_ReadWord(uint16_t flashAddr);
+# 128 "./mcc_generated_files/memory.h"
+void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word);
+# 164 "./mcc_generated_files/memory.h"
+int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
+# 189 "./mcc_generated_files/memory.h"
+void FLASH_EraseBlock(uint16_t startAddr);
+# 220 "./mcc_generated_files/memory.h"
+void DATAEE_WriteByte(uint8_t bAdd, uint8_t bData);
+# 246 "./mcc_generated_files/memory.h"
+uint8_t DATAEE_ReadByte(uint8_t bAdd);
+# 56 "./mcc_generated_files/mcc.h" 2
+
 # 1 "./mcc_generated_files/tmr1.h" 1
 # 101 "./mcc_generated_files/tmr1.h"
 void TMR1_Initialize(void);
@@ -4529,7 +4544,28 @@ void TMR1_CallBack(void);
 extern void (*TMR1_InterruptHandler)(void);
 # 439 "./mcc_generated_files/tmr1.h"
 void TMR1_DefaultInterruptHandler(void);
-# 56 "./mcc_generated_files/mcc.h" 2
+# 57 "./mcc_generated_files/mcc.h" 2
+
+# 1 "./mcc_generated_files/tmr0.h" 1
+# 104 "./mcc_generated_files/tmr0.h"
+void TMR0_Initialize(void);
+# 135 "./mcc_generated_files/tmr0.h"
+uint8_t TMR0_ReadTimer(void);
+# 174 "./mcc_generated_files/tmr0.h"
+void TMR0_WriteTimer(uint8_t timerVal);
+# 210 "./mcc_generated_files/tmr0.h"
+void TMR0_Reload(void);
+# 225 "./mcc_generated_files/tmr0.h"
+void TMR0_ISR(void);
+# 243 "./mcc_generated_files/tmr0.h"
+void TMR0_CallBack(void);
+# 261 "./mcc_generated_files/tmr0.h"
+ void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+# 279 "./mcc_generated_files/tmr0.h"
+extern void (*TMR0_InterruptHandler)(void);
+# 297 "./mcc_generated_files/tmr0.h"
+void TMR0_DefaultInterruptHandler(void);
+# 58 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/adc.h" 1
 # 72 "./mcc_generated_files/adc.h"
@@ -4565,35 +4601,145 @@ adc_result_t ADC_GetConversionResult(void);
 adc_result_t ADC_GetConversion(adc_channel_t channel);
 # 316 "./mcc_generated_files/adc.h"
 void ADC_TemperatureAcquisitionDelay(void);
-# 57 "./mcc_generated_files/mcc.h" 2
+# 59 "./mcc_generated_files/mcc.h" 2
 
-# 1 "./mcc_generated_files/tmr0.h" 1
-# 104 "./mcc_generated_files/tmr0.h"
-void TMR0_Initialize(void);
-# 135 "./mcc_generated_files/tmr0.h"
-uint8_t TMR0_ReadTimer(void);
-# 174 "./mcc_generated_files/tmr0.h"
-void TMR0_WriteTimer(uint8_t timerVal);
-# 210 "./mcc_generated_files/tmr0.h"
-void TMR0_Reload(void);
-# 225 "./mcc_generated_files/tmr0.h"
-void TMR0_ISR(void);
-# 243 "./mcc_generated_files/tmr0.h"
-void TMR0_CallBack(void);
-# 261 "./mcc_generated_files/tmr0.h"
- void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
-# 279 "./mcc_generated_files/tmr0.h"
-extern void (*TMR0_InterruptHandler)(void);
-# 297 "./mcc_generated_files/tmr0.h"
-void TMR0_DefaultInterruptHandler(void);
-# 58 "./mcc_generated_files/mcc.h" 2
-# 73 "./mcc_generated_files/mcc.h"
+# 1 "./mcc_generated_files/eusart.h" 1
+# 75 "./mcc_generated_files/eusart.h"
+typedef union {
+    struct {
+        unsigned perr : 1;
+        unsigned ferr : 1;
+        unsigned oerr : 1;
+        unsigned reserved : 5;
+    };
+    uint8_t status;
+}eusart_status_t;
+# 110 "./mcc_generated_files/eusart.h"
+void EUSART_Initialize(void);
+# 158 "./mcc_generated_files/eusart.h"
+_Bool EUSART_is_tx_ready(void);
+# 206 "./mcc_generated_files/eusart.h"
+_Bool EUSART_is_rx_ready(void);
+# 253 "./mcc_generated_files/eusart.h"
+_Bool EUSART_is_tx_done(void);
+# 301 "./mcc_generated_files/eusart.h"
+eusart_status_t EUSART_get_last_status(void);
+# 321 "./mcc_generated_files/eusart.h"
+uint8_t EUSART_Read(void);
+# 341 "./mcc_generated_files/eusart.h"
+void EUSART_Write(uint8_t txData);
+# 361 "./mcc_generated_files/eusart.h"
+void EUSART_SetFramingErrorHandler(void (* interruptHandler)(void));
+# 379 "./mcc_generated_files/eusart.h"
+void EUSART_SetOverrunErrorHandler(void (* interruptHandler)(void));
+# 397 "./mcc_generated_files/eusart.h"
+void EUSART_SetErrorHandler(void (* interruptHandler)(void));
+# 60 "./mcc_generated_files/mcc.h" 2
+# 75 "./mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
-# 86 "./mcc_generated_files/mcc.h"
+# 88 "./mcc_generated_files/mcc.h"
 void OSCILLATOR_Initialize(void);
-# 98 "./mcc_generated_files/mcc.h"
+# 100 "./mcc_generated_files/mcc.h"
 void WDT_Initialize(void);
 # 44 "main.c" 2
+
+# 1 "./functions.h" 1
+# 15 "./functions.h"
+    void _UIControlISR();
+    void _LogicControlISR();
+
+    void _ReadSensor();
+    void _ControlHeat();
+    void _SendDataToConsole();
+
+    void WriteString(char * input);
+
+    float approximateLog(float x);
+# 45 "main.c" 2
+
+# 1 "./variables.h" 1
+# 15 "./variables.h"
+    enum
+    {
+        DISP_STATE_1 = 0,
+        DISP_STATE_2 = 1,
+        DISP_STATE_3 = 2
+    };
+
+    enum
+    {
+        HEAT_MODE_0 = 0,
+        HEAT_MODE_1 = 1,
+        HEAT_MODE_2 = 2,
+        HEAT_MODE_3 = 3,
+        HEAT_MODE_4 = 4,
+        HEAT_MODE_5 = 5,
+    };
+
+
+
+    int CURRENT_MODE = HEAT_MODE_0;
+    int DISP_STATE = DISP_STATE_1;
+    _Bool RELAY_STATUS = 0;
+
+    _Bool _LastUpState = 1;
+    _Bool _LastDownState = 0;
+
+
+    char displayString[16];
+
+
+    const int SETPOINTS[5] = {65, 68, 71, 74, 77};
+
+
+    const int SHUT_OFF = 2;
+
+
+    const int TURN_ON = 1;
+
+
+    int TEMP = 0;
+
+
+    int READING_ITER = 0;
+
+
+    _Bool FULL_SAMPLE = 0;
+
+
+
+
+    const int MIN_RUN_TIME = 3;
+
+
+
+    const int MIN_IDLE_TIME = 3;
+
+
+
+    uint16_t HEAT_CALL_TICKS;
+
+
+
+    const int ONE_SECOND = 10;
+
+
+
+    uint8_t LOGIC_TICK = 0;
+
+
+
+
+
+    _Bool READ_FLAG = 0;
+    _Bool UART_FLAG = 0;
+    _Bool LOGIC_FLAG = 0;
+
+
+    const float A = 1.009249522e-03;
+    const float B = 2.378405444e-04;
+    const float C = 2.019202697e-07;
+# 46 "main.c" 2
 
 
 
@@ -4603,9 +4749,330 @@ void main(void)
 {
 
     SYSTEM_Initialize();
-# 69 "main.c"
+
+
+
+
+
+    (INTCONbits.GIE = 1);
+
+
+    (INTCONbits.PEIE = 1);
+
+
+
+
+
+
+
+    TMR0_SetInterruptHandler(_UIControlISR);
+    TMR1_SetInterruptHandler(_LogicControlISR);
+
     while (1)
     {
+        _Bool savedRelay;
+
+
+        if (READ_FLAG)
+        {
+            READ_FLAG = 0;
+            _ReadSensor();
+        }
+
+        if (UART_FLAG)
+        {
+            UART_FLAG = 0;
+            if (1)
+                _SendDataToConsole();
+        }
+
+        if (LOGIC_FLAG)
+        {
+            LOGIC_FLAG = 0;
+
+            savedRelay = RELAY_STATUS;
+
+
+            HEAT_CALL_TICKS++;
+            if (RELAY_STATUS)
+            {
+
+                if (HEAT_CALL_TICKS > (MIN_RUN_TIME * 60))
+                    HEAT_CALL_TICKS = MIN_RUN_TIME * 60;
+            }
+            else
+            {
+
+                if (HEAT_CALL_TICKS > (MIN_IDLE_TIME * 60))
+                    HEAT_CALL_TICKS = MIN_IDLE_TIME * 60;
+            }
+
+
+            _ControlHeat();
+
+            if (savedRelay != RELAY_STATUS)
+            {
+
+                HEAT_CALL_TICKS = 0;
+            }
+
+            if (RELAY_STATUS)
+                do { LATAbits.LATA2 = 1; } while(0);
+            else
+                do { LATAbits.LATA2 = 0; } while(0);
+        }
+    }
+}
+
+
+
+void _UIControlISR()
+{
+    _Bool btnUpRead, btnDnRead;
+
+
+    switch(DISP_STATE)
+    {
+        case DISP_STATE_1:
+
+            btnUpRead = PORTAbits.RA4;
+            btnDnRead = PORTBbits.RB0;
+
+            if (!btnUpRead)
+            {
+
+                if (_LastUpState)
+                {
+
+
+                    if (CURRENT_MODE > HEAT_MODE_0)
+                        CURRENT_MODE--;
+
+
+
+                }
+                else
+                {
+
+                }
+            }
+
+
+            _LastUpState = btnUpRead;
+
+            if (!btnDnRead)
+            {
+
+                if (_LastDownState)
+                {
+
+
+                    if (CURRENT_MODE < HEAT_MODE_5)
+                        CURRENT_MODE++;
+
+
+
+                }
+                else
+                {
+
+                }
+            }
+
+
+            _LastDownState = btnDnRead;
+
+
+            DISP_STATE = DISP_STATE_2;
+
+            do { LATBbits.LATB1 = 1; } while(0);
+            do { LATAbits.LATA3 = 0; } while(0);
+
+
+            if (CURRENT_MODE > HEAT_MODE_1)
+            {
+                do { LATAbits.LATA4 = 0; } while(0);
+
+                if (CURRENT_MODE > HEAT_MODE_2)
+                    do { LATBbits.LATB0 = 0; } while(0);
+                else
+                    do { LATBbits.LATB0 = 1; } while(0);
+            }
+            else
+            {
+                do { LATAbits.LATA4 = 1; } while(0);
+                do { LATBbits.LATB0 = 1; } while(0);
+            }
+
+
+            do { LATBbits.LATB2 = 1; } while(0);
+
+            break;
+        case DISP_STATE_2:
+
+            DISP_STATE = DISP_STATE_3;
+
+            do { LATBbits.LATB1 = 0; } while(0);
+            do { LATAbits.LATA3 = 1; } while(0);
+
+
+            if (CURRENT_MODE > HEAT_MODE_3)
+            {
+                do { LATBbits.LATB0 = 0; } while(0);
+
+                if (CURRENT_MODE > HEAT_MODE_4)
+                    do { LATAbits.LATA4 = 0; } while(0);
+                else
+                    do { LATAbits.LATA4 = 1; } while(0);
+            }
+            else
+            {
+                do { LATAbits.LATA4 = 1; } while(0);
+                do { LATBbits.LATB0 = 1; } while(0);
+            }
+
+            break;
+        case DISP_STATE_3:
+
+            DISP_STATE = DISP_STATE_1;
+
+            do { TRISAbits.TRISA4 = 1; } while(0);
+            do { TRISBbits.TRISB0 = 1; } while(0);
+
+            if (CURRENT_MODE > HEAT_MODE_0)
+                do { LATBbits.LATB2 = 0; } while(0);
+            else
+                do { LATBbits.LATB2 = 1; } while(0);
+            break;
+
+        default:
+
+            DISP_STATE = DISP_STATE_1;
+    }
+}
+
+
+
+
+void _LogicControlISR()
+{
+
+    LOGIC_TICK++;
+
+    if (LOGIC_TICK >= 3)
+        READ_FLAG = 1;
+
+    if (LOGIC_TICK >= 5)
+        UART_FLAG = 1;
+
+    if (LOGIC_TICK >= ONE_SECOND)
+    {
+        LOGIC_FLAG = 1;
+        LOGIC_TICK = 0;
+    }
+}
+
+void _ReadSensor()
+{
+
+    uint16_t adcValue = ADC_GetConversion(NTC);
+    float Vout = adcValue * (5.0f / 1023.0f);
+
+
+    float Rpullup = 10000.0;
+    float Vcc = 5.0;
+    float Rntc = Rpullup * (Vcc / Vout - 1.0f);
+
+
+    float logR = approximateLog(Rntc / 5000.0f);
+
+
+    float invT = A + B * logR + C * logR * logR * logR;
+    float T = 1.0f / invT;
+    float Tc = T - 273.15f;
+    float Tf = (1.8f * Tc) + 32.0f;
+
+    TEMP = (int)Tf;
+}
+void _ControlHeat()
+{
+    if (CURRENT_MODE == HEAT_MODE_0)
+    {
+        RELAY_STATUS = 0;
+        return;
+    }
+
+
+
+    if (TEMP > (SETPOINTS[CURRENT_MODE] + SHUT_OFF))
+    {
+        if (HEAT_CALL_TICKS > (MIN_RUN_TIME * 60))
+        {
+            RELAY_STATUS = 0;
+            return;
+        }
+
 
     }
+
+    if (TEMP < (SETPOINTS[CURRENT_MODE] - TURN_ON))
+    {
+
+
+        if (HEAT_CALL_TICKS > (MIN_IDLE_TIME * 60))
+        {
+            RELAY_STATUS = 1;
+            return;
+        }
+
+
+    }
+}
+
+void _SendDataToConsole()
+{
+
+
+    int huns, tens, ones;
+
+    huns = TEMP / 100;
+    tens = (TEMP - huns * 100) / 10;
+    ones = (TEMP - huns * 100 - tens * 10);
+
+
+    displayString[0] = 'T';
+    displayString[1] = ':';
+    displayString[2] = huns + 48;
+    displayString[3] = tens + 48;
+    displayString[4] = ones + 48;
+    displayString[5] = '\t';
+    displayString[6] = 'M';
+    displayString[7] = ':';
+    displayString[8] = CURRENT_MODE + 48;
+    displayString[9] = '\t';
+    displayString[10] = 'H';
+    displayString[11] = ':';
+    displayString[12] = RELAY_STATUS + 48;
+    displayString[13] = '\r';
+    displayString[14] = '\n';
+    displayString[15] = '\0';
+
+    WriteString(displayString);
+}
+
+void WriteString(char * input)
+{
+    int i = 0;
+
+    while (input[i] != '\0')
+    {
+        EUSART_Write(input[i]);
+        i++;
+    }
+}
+
+
+float approximateLog(float x) {
+    float y = x - 1.0f;
+    return y - (y * y) / 2.0f + (y * y * y) / 3.0f;
 }

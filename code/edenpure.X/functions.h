@@ -16,8 +16,12 @@ extern "C" {
     void _LogicControlISR();
     
     void _ReadSensor();
-    void _AverageSensor();
     void _ControlHeat();
+    void _SendDataToConsole();
+    
+    void WriteString(char * input);
+    
+    float approximateLog(float x);
 
 
 #ifdef	__cplusplus

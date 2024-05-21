@@ -529,7 +529,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "55
 [; ;mcc_generated_files/interrupt_manager.c: 55:     if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
-[e $ ! && == -> . . _INTCONbits 0 5 `i -> 1 `i == -> . . _INTCONbits 0 2 `i -> 1 `i 358  ]
+[e $ ! && == -> . . _INTCONbits 0 5 `i -> 1 `i == -> . . _INTCONbits 0 2 `i -> 1 `i 360  ]
 "56
 [; ;mcc_generated_files/interrupt_manager.c: 56:     {
 {
@@ -539,17 +539,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 "58
 [; ;mcc_generated_files/interrupt_manager.c: 58:     }
 }
-[e $U 359  ]
+[e $U 361  ]
 "59
 [; ;mcc_generated_files/interrupt_manager.c: 59:     else if(INTCONbits.PEIE == 1)
-[e :U 358 ]
-[e $ ! == -> . . _INTCONbits 0 6 `i -> 1 `i 360  ]
+[e :U 360 ]
+[e $ ! == -> . . _INTCONbits 0 6 `i -> 1 `i 362  ]
 "60
 [; ;mcc_generated_files/interrupt_manager.c: 60:     {
 {
 "61
 [; ;mcc_generated_files/interrupt_manager.c: 61:         if(PIE1bits.TMR1IE == 1 && PIR1bits.TMR1IF == 1)
-[e $ ! && == -> . . _PIE1bits 0 0 `i -> 1 `i == -> . . _PIR1bits 0 0 `i -> 1 `i 361  ]
+[e $ ! && == -> . . _PIE1bits 0 0 `i -> 1 `i == -> . . _PIR1bits 0 0 `i -> 1 `i 363  ]
 "62
 [; ;mcc_generated_files/interrupt_manager.c: 62:         {
 {
@@ -559,33 +559,33 @@ Version 4.0 HI-TECH Software Intermediate Code
 "64
 [; ;mcc_generated_files/interrupt_manager.c: 64:         }
 }
-[e $U 362  ]
+[e $U 364  ]
 "65
 [; ;mcc_generated_files/interrupt_manager.c: 65:         else
-[e :U 361 ]
+[e :U 363 ]
 "66
 [; ;mcc_generated_files/interrupt_manager.c: 66:         {
 {
 "68
 [; ;mcc_generated_files/interrupt_manager.c: 68:         }
 }
-[e :U 362 ]
+[e :U 364 ]
 "69
 [; ;mcc_generated_files/interrupt_manager.c: 69:     }
 }
-[e $U 363  ]
+[e $U 365  ]
 "70
 [; ;mcc_generated_files/interrupt_manager.c: 70:     else
-[e :U 360 ]
+[e :U 362 ]
 "71
 [; ;mcc_generated_files/interrupt_manager.c: 71:     {
 {
 "73
 [; ;mcc_generated_files/interrupt_manager.c: 73:     }
 }
-[e :U 363 ]
-[e :U 359 ]
+[e :U 365 ]
+[e :U 361 ]
 "74
 [; ;mcc_generated_files/interrupt_manager.c: 74: }
-[e :UE 357 ]
+[e :UE 359 ]
 }
