@@ -1,0 +1,88 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"4 custom_math.c
+[; ;custom_math.c: 4: float my_log(float x) {
+[v _my_log `(f ~T0 @X0 1 ef1`f ]
+{
+[e :U _my_log ]
+[v _x `f ~T0 @X0 1 r1 ]
+[f ]
+"5
+[; ;custom_math.c: 5:     if (x <= 0) {
+[e $ ! <= _x -> -> 0 `i `f 2  ]
+{
+"6
+[; ;custom_math.c: 6:         return 0.0f;
+[e ) -> .0.0 `f ]
+[e $UE 1  ]
+"7
+[; ;custom_math.c: 7:     }
+}
+[e :U 2 ]
+"10
+[; ;custom_math.c: 10:     float result = 0.0f;
+[v _result `f ~T0 @X0 1 a ]
+[e = _result -> .0.0 `f ]
+"11
+[; ;custom_math.c: 11:     while (x > 1.5f) {
+[e $U 3  ]
+[e :U 4 ]
+{
+"12
+[; ;custom_math.c: 12:         x /= 2.718281828459045f;
+[e =/ _x -> .2.718281828459045 `f ]
+"13
+[; ;custom_math.c: 13:         result += 1.0f;
+[e =+ _result -> .1.0 `f ]
+"14
+[; ;custom_math.c: 14:     }
+}
+[e :U 3 ]
+"11
+[; ;custom_math.c: 11:     while (x > 1.5f) {
+[e $ > _x -> .1.5 `f 4  ]
+[e :U 5 ]
+"16
+[; ;custom_math.c: 16:     x -= 1.0f;
+[e =- _x -> .1.0 `f ]
+"19
+[; ;custom_math.c: 19:     float term = x;
+[v _term `f ~T0 @X0 1 a ]
+[e = _term _x ]
+"20
+[; ;custom_math.c: 20:     float sum = 0.0f;
+[v _sum `f ~T0 @X0 1 a ]
+[e = _sum -> .0.0 `f ]
+"21
+[; ;custom_math.c: 21:     int n = 1;
+[v _n `i ~T0 @X0 1 a ]
+[e = _n -> 1 `i ]
+"23
+[; ;custom_math.c: 23:     while (term > 1e-7f || term < -1e-7f) {
+[e $U 6  ]
+[e :U 7 ]
+{
+"24
+[; ;custom_math.c: 24:         sum += term;
+[e =+ _sum _term ]
+"25
+[; ;custom_math.c: 25:         n++;
+[e ++ _n -> 1 `i ]
+"26
+[; ;custom_math.c: 26:         term *= -x * (n - 1) / n;
+[e =* _term / * -U _x -> - _n -> 1 `i `f -> _n `f ]
+"27
+[; ;custom_math.c: 27:     }
+}
+[e :U 6 ]
+"23
+[; ;custom_math.c: 23:     while (term > 1e-7f || term < -1e-7f) {
+[e $ || > _term -> .1e-7 `f < _term -U -> .1e-7 `f 7  ]
+[e :U 8 ]
+"29
+[; ;custom_math.c: 29:     return result + sum;
+[e ) + _result _sum ]
+[e $UE 1  ]
+"30
+[; ;custom_math.c: 30: }
+[e :UE 1 ]
+}

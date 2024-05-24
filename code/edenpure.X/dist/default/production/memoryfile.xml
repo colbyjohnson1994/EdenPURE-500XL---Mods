@@ -3,15 +3,15 @@
   <executable name="dist/default/production\edenpure.X.production.hex">
     <memory name="program">
       <units>words</units>
-      <length>4096</length>
-      <used>3638</used>
-      <free>458</free>
+      <length>8192</length>
+      <used>4054</used>
+      <free>4138</free>
     </memory>
     <memory name="data">
       <units>bytes</units>
-      <length>384</length>
-      <used>216</used>
-      <free>168</free>
+      <length>1024</length>
+      <used>201</used>
+      <free>823</free>
     </memory>
   </executable>
 </project>

@@ -14,7 +14,7 @@
     This source file provides APIs for TMR0.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.81.8
-        Device            :  PIC16F1827
+        Device            :  PIC16F1847
         Driver Version    :  2.01
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.36 and above
@@ -107,15 +107,22 @@ void TMR0_Reload(void)
 
 void TMR0_ISR(void)
 {
+    static volatile uint16_t CountCallBack = 0;
 
     // Clear the TMR0 interrupt flag
     INTCONbits.TMR0IF = 0;
 
     TMR0 = timer0ReloadVal;
 
-    // ticker function call;
-    // ticker is 1 -> Callback function gets called every time this ISR executes
-    TMR0_CallBack();
+    // callback function - called every 100th pass
+    if (++CountCallBack >= TMR0_INTERRUPT_TICKER_FACTOR)
+    {
+        // ticker function call
+        TMR0_CallBack();
+
+        // reset ticker counter
+        CountCallBack = 0;
+    }
 
     // add your TMR0 interrupt custom code
 }

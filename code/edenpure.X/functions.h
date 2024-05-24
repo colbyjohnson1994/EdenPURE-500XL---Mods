@@ -18,10 +18,6 @@ extern "C" {
     void _ReadSensor();
     void _ControlHeat();
     void _SendDataToConsole();
-    
-    void WriteString(char * input);
-    
-    float approximateLog(float x);
 
 
 #ifdef	__cplusplus

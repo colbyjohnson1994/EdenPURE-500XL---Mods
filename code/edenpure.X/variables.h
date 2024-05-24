@@ -31,15 +31,12 @@ extern "C" {
     
     // current mode is read from eeprom on startup to resume
     // last state heater was in before shut down
-    int CURRENT_MODE = HEAT_MODE_0;
+    int CURRENT_MODE = HEAT_MODE_5;
     int DISP_STATE = DISP_STATE_1;
     bool RELAY_STATUS = false;
     
     bool _LastUpState = true; // default to last state was clicked
     bool _LastDownState = false; // default to last state was clicked
-    
-    // eusart display
-    char displayString[16];
     
     // all setpoints are in degrees F
     const int SETPOINTS[5] = {65, 68, 71, 74, 77};
@@ -89,9 +86,9 @@ extern "C" {
     bool LOGIC_FLAG = false;    // control heating logic flag
     
     // Steinhart-Hart coefficients for a 5k NTC thermistor
-    const float A = 1.009249522e-03;
-    const float B = 2.378405444e-04;
-    const float C = 2.019202697e-07;
+    const float A = 1.281740088e-03;
+    const float B = 2.366791957e-04;
+    const float C = 0.9133782384e-07;
 
 #ifdef	__cplusplus
 }

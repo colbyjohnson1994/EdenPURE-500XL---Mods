@@ -14,7 +14,7 @@
     This header file provides APIs for TMR0.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.81.8
-        Device            :  PIC16F1827
+        Device            :  PIC16F1847
         Driver Version    :  2.01
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.36 and above
@@ -64,7 +64,7 @@
   Section: Macro Declarations
 */
 
-#define TMR0_INTERRUPT_TICKER_FACTOR    1
+#define TMR0_INTERRUPT_TICKER_FACTOR    100
 
 /**
   Section: TMR0 APIs

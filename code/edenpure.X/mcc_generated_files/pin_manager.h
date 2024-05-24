@@ -14,7 +14,7 @@
     This header file provides APIs for driver for .
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.81.8
-        Device            :  PIC16F1827
+        Device            :  PIC16F1847
         Driver Version    :  2.11
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.36 and above
@@ -169,22 +169,22 @@
 #define LED1_N_SetAnalogMode()      do { ANSELBbits.ANSB2 = 1; } while(0)
 #define LED1_N_SetDigitalMode()     do { ANSELBbits.ANSB2 = 0; } while(0)
 
-// get/set NTC_N aliases
-#define NTC_N_TRIS                 TRISBbits.TRISB3
-#define NTC_N_LAT                  LATBbits.LATB3
-#define NTC_N_PORT                 PORTBbits.RB3
-#define NTC_N_WPU                  WPUBbits.WPUB3
-#define NTC_N_ANS                  ANSELBbits.ANSB3
-#define NTC_N_SetHigh()            do { LATBbits.LATB3 = 1; } while(0)
-#define NTC_N_SetLow()             do { LATBbits.LATB3 = 0; } while(0)
-#define NTC_N_Toggle()             do { LATBbits.LATB3 = ~LATBbits.LATB3; } while(0)
-#define NTC_N_GetValue()           PORTBbits.RB3
-#define NTC_N_SetDigitalInput()    do { TRISBbits.TRISB3 = 1; } while(0)
-#define NTC_N_SetDigitalOutput()   do { TRISBbits.TRISB3 = 0; } while(0)
-#define NTC_N_SetPullup()          do { WPUBbits.WPUB3 = 1; } while(0)
-#define NTC_N_ResetPullup()        do { WPUBbits.WPUB3 = 0; } while(0)
-#define NTC_N_SetAnalogMode()      do { ANSELBbits.ANSB3 = 1; } while(0)
-#define NTC_N_SetDigitalMode()     do { ANSELBbits.ANSB3 = 0; } while(0)
+// get/set NTC_P aliases
+#define NTC_P_TRIS                 TRISBbits.TRISB3
+#define NTC_P_LAT                  LATBbits.LATB3
+#define NTC_P_PORT                 PORTBbits.RB3
+#define NTC_P_WPU                  WPUBbits.WPUB3
+#define NTC_P_ANS                  ANSELBbits.ANSB3
+#define NTC_P_SetHigh()            do { LATBbits.LATB3 = 1; } while(0)
+#define NTC_P_SetLow()             do { LATBbits.LATB3 = 0; } while(0)
+#define NTC_P_Toggle()             do { LATBbits.LATB3 = ~LATBbits.LATB3; } while(0)
+#define NTC_P_GetValue()           PORTBbits.RB3
+#define NTC_P_SetDigitalInput()    do { TRISBbits.TRISB3 = 1; } while(0)
+#define NTC_P_SetDigitalOutput()   do { TRISBbits.TRISB3 = 0; } while(0)
+#define NTC_P_SetPullup()          do { WPUBbits.WPUB3 = 1; } while(0)
+#define NTC_P_ResetPullup()        do { WPUBbits.WPUB3 = 0; } while(0)
+#define NTC_P_SetAnalogMode()      do { ANSELBbits.ANSB3 = 1; } while(0)
+#define NTC_P_SetDigitalMode()     do { ANSELBbits.ANSB3 = 0; } while(0)
 
 // get/set RB5 procedures
 #define RB5_SetHigh()            do { LATBbits.LATB5 = 1; } while(0)
@@ -198,22 +198,22 @@
 #define RB5_SetAnalogMode()         do { ANSELBbits.ANSB5 = 1; } while(0)
 #define RB5_SetDigitalMode()        do { ANSELBbits.ANSB5 = 0; } while(0)
 
-// get/set NTC_P aliases
-#define NTC_P_TRIS                 TRISBbits.TRISB6
-#define NTC_P_LAT                  LATBbits.LATB6
-#define NTC_P_PORT                 PORTBbits.RB6
-#define NTC_P_WPU                  WPUBbits.WPUB6
-#define NTC_P_ANS                  ANSELBbits.ANSB6
-#define NTC_P_SetHigh()            do { LATBbits.LATB6 = 1; } while(0)
-#define NTC_P_SetLow()             do { LATBbits.LATB6 = 0; } while(0)
-#define NTC_P_Toggle()             do { LATBbits.LATB6 = ~LATBbits.LATB6; } while(0)
-#define NTC_P_GetValue()           PORTBbits.RB6
-#define NTC_P_SetDigitalInput()    do { TRISBbits.TRISB6 = 1; } while(0)
-#define NTC_P_SetDigitalOutput()   do { TRISBbits.TRISB6 = 0; } while(0)
-#define NTC_P_SetPullup()          do { WPUBbits.WPUB6 = 1; } while(0)
-#define NTC_P_ResetPullup()        do { WPUBbits.WPUB6 = 0; } while(0)
-#define NTC_P_SetAnalogMode()      do { ANSELBbits.ANSB6 = 1; } while(0)
-#define NTC_P_SetDigitalMode()     do { ANSELBbits.ANSB6 = 0; } while(0)
+// get/set NTC_N aliases
+#define NTC_N_TRIS                 TRISBbits.TRISB6
+#define NTC_N_LAT                  LATBbits.LATB6
+#define NTC_N_PORT                 PORTBbits.RB6
+#define NTC_N_WPU                  WPUBbits.WPUB6
+#define NTC_N_ANS                  ANSELBbits.ANSB6
+#define NTC_N_SetHigh()            do { LATBbits.LATB6 = 1; } while(0)
+#define NTC_N_SetLow()             do { LATBbits.LATB6 = 0; } while(0)
+#define NTC_N_Toggle()             do { LATBbits.LATB6 = ~LATBbits.LATB6; } while(0)
+#define NTC_N_GetValue()           PORTBbits.RB6
+#define NTC_N_SetDigitalInput()    do { TRISBbits.TRISB6 = 1; } while(0)
+#define NTC_N_SetDigitalOutput()   do { TRISBbits.TRISB6 = 0; } while(0)
+#define NTC_N_SetPullup()          do { WPUBbits.WPUB6 = 1; } while(0)
+#define NTC_N_ResetPullup()        do { WPUBbits.WPUB6 = 0; } while(0)
+#define NTC_N_SetAnalogMode()      do { ANSELBbits.ANSB6 = 1; } while(0)
+#define NTC_N_SetDigitalMode()     do { ANSELBbits.ANSB6 = 0; } while(0)
 
 // get/set NTC aliases
 #define NTC_TRIS                 TRISBbits.TRISB7

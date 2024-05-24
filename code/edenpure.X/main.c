@@ -14,7 +14,7 @@
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.81.8
-        Device            :  PIC16F1827
+        Device            :  PIC16F1847
         Driver Version    :  2.00
 */
 
@@ -44,6 +44,7 @@
 #include "mcc_generated_files/mcc.h"
 #include "functions.h"
 #include "variables.h"
+#include "custom_math.h"
 
 /*
                          Main application
@@ -287,7 +288,7 @@ void _ReadSensor()
     float Rntc = Rpullup * (Vcc / Vout - 1.0f);
 
     // Calculate approximate logarithm of the resistance
-    float logR = approximateLog(Rntc / 5000.0f); // Normalize Rntc by 5000 (the nominal resistance)
+    float logR = my_log(Rntc);
 
     // Calculate temperature using the Steinhart-Hart equation with the approximate log
     float invT = A + B * logR + C * logR * logR * logR;
@@ -343,41 +344,21 @@ void _SendDataToConsole()
     ones = (TEMP - huns * 100 - tens * 10);
     
     // current temp
-    displayString[0] = 'T';
-    displayString[1] = ':';
-    displayString[2] = huns + 48;
-    displayString[3] = tens + 48;
-    displayString[4] = ones + 48;
-    displayString[5] = '\t';
-    displayString[6] = 'M';
-    displayString[7] = ':';
-    displayString[8] = CURRENT_MODE + 48;
-    displayString[9] = '\t';
-    displayString[10] = 'H';
-    displayString[11] = ':';
-    displayString[12] = RELAY_STATUS + 48;
-    displayString[13] = '\r';
-    displayString[14] = '\n';
-    displayString[15] = '\0';
-    
-    WriteString(displayString);
-}
-
-void WriteString(char * input)
-{
-    int i = 0; // Initialize an index variable
-
-    while (input[i] != '\0')
-    {
-        EUSART_Write(input[i]);
-        i++;
-    }
-}
-
-// Simple logarithm approximation
-float approximateLog(float x) {
-    float y = x - 1.0f;
-    return y - (y * y) / 2.0f + (y * y * y) / 3.0f;
+    EUSART_Write('T');
+    EUSART_Write(':');
+    EUSART_Write(huns + 48);
+    EUSART_Write(tens + 48);
+    EUSART_Write(ones + 48);
+    EUSART_Write('\t');
+    EUSART_Write('M');
+    EUSART_Write(':');
+    EUSART_Write(CURRENT_MODE + 48);
+    EUSART_Write('\t');
+    EUSART_Write('H');
+    EUSART_Write(':');
+    EUSART_Write(RELAY_STATUS + 48);
+    EUSART_Write('\r');
+    EUSART_Write('\n');
 }
 /**
  End of File
