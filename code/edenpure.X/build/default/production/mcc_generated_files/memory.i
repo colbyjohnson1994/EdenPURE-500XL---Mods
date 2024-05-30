@@ -4506,6 +4506,7 @@ void DATAEE_WriteByte(uint8_t bAdd, uint8_t bData)
 
     while (EECON1bits.WR)
     {
+        __nop();
     }
 
     EECON1bits.WREN = 0;
@@ -4518,6 +4519,7 @@ uint8_t DATAEE_ReadByte(uint8_t bAdd)
     EECON1bits.CFGS = 0;
     EECON1bits.EEPGD = 0;
     EECON1bits.RD = 1;
+    __nop();
     __nop();
     __nop();
 

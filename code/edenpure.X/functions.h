@@ -14,6 +14,7 @@ extern "C" {
 
     void _UIControlISR();
     void _LogicControlISR();
+    void _SpkrControlISR();
     
     void _ReadSensor();
     void _ControlHeat();

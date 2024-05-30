@@ -595,8 +595,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mcc_generated_files/eusart.c: 77:     TXSTA = 0x24;
 [e = _TXSTA -> -> 36 `i `uc ]
 "80
-[; ;mcc_generated_files/eusart.c: 80:     SPBRGL = 0xCF;
-[e = _SPBRGL -> -> 207 `i `uc ]
+[; ;mcc_generated_files/eusart.c: 80:     SPBRGL = 0x10;
+[e = _SPBRGL -> -> 16 `i `uc ]
 "83
 [; ;mcc_generated_files/eusart.c: 83:     SPBRGH = 0x00;
 [e = _SPBRGH -> -> 0 `i `uc ]

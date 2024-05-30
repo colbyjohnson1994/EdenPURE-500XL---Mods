@@ -31,15 +31,16 @@ extern "C" {
     
     // current mode is read from eeprom on startup to resume
     // last state heater was in before shut down
-    int CURRENT_MODE = HEAT_MODE_5;
+    int CURRENT_MODE = HEAT_MODE_0;
     int DISP_STATE = DISP_STATE_1;
     bool RELAY_STATUS = false;
     
-    bool _LastUpState = true; // default to last state was clicked
+    bool _LastUpState = false; // default to last state was clicked
     bool _LastDownState = false; // default to last state was clicked
+    bool _SaveMemory = false;
     
     // all setpoints are in degrees F
-    const int SETPOINTS[5] = {65, 68, 71, 74, 77};
+    const int SETPOINTS[6] = {0, 65, 68, 71, 74, 77};
     
     // in degrees F, temperature above setpoint the heat will shut off
     const int SHUT_OFF = 2;
@@ -59,15 +60,15 @@ extern "C" {
     // in minutes minimum amount of time we should run, this is a measure
     // to prevent rapid cycling heater elements, which can lead to short 
     // service life
-    const int MIN_RUN_TIME = 3;
+    const int MIN_RUN_TIME = 1;
     
     // in minutes, minimum amount of time in between heat calls. This helps
     // ensure heating elements have cooled back down to room temperature
-    const int MIN_IDLE_TIME = 3;
+    const int MIN_IDLE_TIME = 1;
     
     // tick count (in seconds) that indicates how long we have been idle or running
     // this is capped at the min run or min idle time to prevent overrun
-    uint16_t HEAT_CALL_TICKS;
+    uint16_t HEAT_CALL_TICKS = MIN_IDLE_TIME * 60;
     
     
     // number of logic control isr ticks that equal 1 second
@@ -77,9 +78,22 @@ extern "C" {
     // this is reset once 1 second is hit
     uint8_t LOGIC_TICK = 0;
     
-#define DEBUG       1   // whether or not debugging information is sent out on console port
+    uint8_t SPKR_DURATION = 2; // in 100ms increments
+    uint8_t SPKR_COUNT = 100; // counts how long the speaker has been active
+    uint8_t SPKR_DC = 0;    //speaker duty cycle for changing frequency on button type
+    bool DN_CLICKED = false;
+    
+#define DEBUG       1   // determines what type of data is shown on console
+                        // 0 - nothing
+                        // 1 - temp, mode and relay status
+                        // 2 - heat control states
+                        // 3 - button read adc
 #define READ_PERIOD 3   // number of 100ms ticks often we read from the sensor
 #define UART_PERIOD 5   // number of 100ms ticks often we send data out on console
+    
+#define EEPROM_VAL_OFFSET  25  //randomly picked value to make sure value read back on blank memory
+                        // doesn't cause issue.
+#define EEPROM_ADDRESS      10
     
     bool READ_FLAG = false;     // read/average from sensor flag
     bool UART_FLAG = false;     // send uart data flag

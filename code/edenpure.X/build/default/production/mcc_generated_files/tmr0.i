@@ -4379,10 +4379,10 @@ void TMR0_Initialize(void)
     OPTION_REG = (uint8_t)((OPTION_REG & 0xC0) | (0xD7 & 0x3F));
 
 
-    TMR0 = 0xB2;
+    TMR0 = 0xF8;
 
 
-    timer0ReloadVal= 178;
+    timer0ReloadVal= 248;
 
 
     INTCONbits.TMR0IF = 0;
@@ -4417,7 +4417,6 @@ void TMR0_Reload(void)
 
 void TMR0_ISR(void)
 {
-    static volatile uint16_t CountCallBack = 0;
 
 
     INTCONbits.TMR0IF = 0;
@@ -4425,14 +4424,8 @@ void TMR0_ISR(void)
     TMR0 = timer0ReloadVal;
 
 
-    if (++CountCallBack >= 100)
-    {
 
-        TMR0_CallBack();
-
-
-        CountCallBack = 0;
-    }
+    TMR0_CallBack();
 
 
 }

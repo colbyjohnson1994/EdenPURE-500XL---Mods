@@ -1,4 +1,4 @@
-# 1 "mcc_generated_files/eusart.c"
+# 1 "mcc_generated_files/tmr2.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,10 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "mcc_generated_files/eusart.c" 2
-# 50 "mcc_generated_files/eusart.c"
-# 1 "mcc_generated_files/eusart.h" 1
-# 54 "mcc_generated_files/eusart.h"
+# 1 "mcc_generated_files/tmr2.c" 2
+# 51 "mcc_generated_files/tmr2.c"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -4336,156 +4334,128 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC12-16F1xxx_DFP/1.3.90/xc8\\pic\\include\\xc.h" 2 3
-# 54 "mcc_generated_files/eusart.h" 2
+# 51 "mcc_generated_files/tmr2.c" 2
 
+# 1 "mcc_generated_files/tmr2.h" 1
+# 55 "mcc_generated_files/tmr2.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdbool.h" 1 3
-# 55 "mcc_generated_files/eusart.h" 2
-# 75 "mcc_generated_files/eusart.h"
-typedef union {
-    struct {
-        unsigned perr : 1;
-        unsigned ferr : 1;
-        unsigned oerr : 1;
-        unsigned reserved : 5;
-    };
-    uint8_t status;
-}eusart_status_t;
-# 110 "mcc_generated_files/eusart.h"
-void EUSART_Initialize(void);
-# 158 "mcc_generated_files/eusart.h"
-_Bool EUSART_is_tx_ready(void);
-# 206 "mcc_generated_files/eusart.h"
-_Bool EUSART_is_rx_ready(void);
-# 253 "mcc_generated_files/eusart.h"
-_Bool EUSART_is_tx_done(void);
-# 301 "mcc_generated_files/eusart.h"
-eusart_status_t EUSART_get_last_status(void);
-# 321 "mcc_generated_files/eusart.h"
-uint8_t EUSART_Read(void);
-# 341 "mcc_generated_files/eusart.h"
-void EUSART_Write(uint8_t txData);
-# 361 "mcc_generated_files/eusart.h"
-void EUSART_SetFramingErrorHandler(void (* interruptHandler)(void));
-# 379 "mcc_generated_files/eusart.h"
-void EUSART_SetOverrunErrorHandler(void (* interruptHandler)(void));
-# 397 "mcc_generated_files/eusart.h"
-void EUSART_SetErrorHandler(void (* interruptHandler)(void));
-# 50 "mcc_generated_files/eusart.c" 2
-
-
-volatile eusart_status_t eusartRxLastError;
+# 55 "mcc_generated_files/tmr2.h" 2
+# 103 "mcc_generated_files/tmr2.h"
+void TMR2_Initialize(void);
+# 132 "mcc_generated_files/tmr2.h"
+void TMR2_StartTimer(void);
+# 164 "mcc_generated_files/tmr2.h"
+void TMR2_StopTimer(void);
+# 199 "mcc_generated_files/tmr2.h"
+uint8_t TMR2_ReadTimer(void);
+# 238 "mcc_generated_files/tmr2.h"
+void TMR2_WriteTimer(uint8_t timerVal);
+# 290 "mcc_generated_files/tmr2.h"
+void TMR2_LoadPeriodRegister(uint8_t periodVal);
+# 308 "mcc_generated_files/tmr2.h"
+void TMR2_ISR(void);
+# 326 "mcc_generated_files/tmr2.h"
+ void TMR2_CallBack(void);
+# 343 "mcc_generated_files/tmr2.h"
+ void TMR2_SetInterruptHandler(void (* InterruptHandler)(void));
+# 361 "mcc_generated_files/tmr2.h"
+extern void (*TMR2_InterruptHandler)(void);
+# 379 "mcc_generated_files/tmr2.h"
+void TMR2_DefaultInterruptHandler(void);
+# 52 "mcc_generated_files/tmr2.c" 2
 
 
 
 
 
-void (*EUSART_FramingErrorHandler)(void);
-void (*EUSART_OverrunErrorHandler)(void);
-void (*EUSART_ErrorHandler)(void);
 
-void EUSART_DefaultFramingErrorHandler(void);
-void EUSART_DefaultOverrunErrorHandler(void);
-void EUSART_DefaultErrorHandler(void);
+void (*TMR2_InterruptHandler)(void);
 
-void EUSART_Initialize(void)
+
+
+
+
+void TMR2_Initialize(void)
 {
 
 
 
-    BAUDCON = 0x08;
+    PR2 = 0x03;
 
 
-    RCSTA = 0x80;
+    TMR2 = 0x00;
 
 
-    TXSTA = 0x24;
+    PIR1bits.TMR2IF = 0;
 
 
-    SPBRGL = 0x10;
+    PIE1bits.TMR2IE = 1;
 
 
-    SPBRGH = 0x00;
+    TMR2_SetInterruptHandler(TMR2_DefaultInterruptHandler);
 
 
-    EUSART_SetFramingErrorHandler(EUSART_DefaultFramingErrorHandler);
-    EUSART_SetOverrunErrorHandler(EUSART_DefaultOverrunErrorHandler);
-    EUSART_SetErrorHandler(EUSART_DefaultErrorHandler);
-
-    eusartRxLastError.status = 0;
-
+    T2CON = 0x7E;
 }
 
-_Bool EUSART_is_tx_ready(void)
+void TMR2_StartTimer(void)
 {
-    return (_Bool)(PIR1bits.TXIF && TXSTAbits.TXEN);
+
+    T2CONbits.TMR2ON = 1;
 }
 
-_Bool EUSART_is_rx_ready(void)
+void TMR2_StopTimer(void)
 {
-    return (_Bool)(PIR1bits.RCIF);
+
+    T2CONbits.TMR2ON = 0;
 }
 
-_Bool EUSART_is_tx_done(void)
+uint8_t TMR2_ReadTimer(void)
 {
-    return TXSTAbits.TRMT;
+    uint8_t readVal;
+
+    readVal = TMR2;
+
+    return readVal;
 }
 
-eusart_status_t EUSART_get_last_status(void){
-    return eusartRxLastError;
-}
-
-uint8_t EUSART_Read(void)
+void TMR2_WriteTimer(uint8_t timerVal)
 {
-    while(!PIR1bits.RCIF)
+
+    TMR2 = timerVal;
+}
+
+void TMR2_LoadPeriodRegister(uint8_t periodVal)
+{
+   PR2 = periodVal;
+}
+
+void TMR2_ISR(void)
+{
+
+
+    PIR1bits.TMR2IF = 0;
+
+
+
+    TMR2_CallBack();
+}
+
+void TMR2_CallBack(void)
+{
+
+
+    if(TMR2_InterruptHandler)
     {
+        TMR2_InterruptHandler();
     }
-
-    eusartRxLastError.status = 0;
-
-    if(1 == RCSTAbits.OERR)
-    {
-
-
-        RCSTAbits.CREN = 0;
-        RCSTAbits.CREN = 1;
-    }
-
-    return RCREG;
 }
 
-void EUSART_Write(uint8_t txData)
-{
-    while(0 == PIR1bits.TXIF)
-    {
-    }
-
-    TXREG = txData;
+void TMR2_SetInterruptHandler(void (* InterruptHandler)(void)){
+    TMR2_InterruptHandler = InterruptHandler;
 }
 
+void TMR2_DefaultInterruptHandler(void){
 
 
-
-void EUSART_DefaultFramingErrorHandler(void){}
-
-void EUSART_DefaultOverrunErrorHandler(void){
-
-
-    RCSTAbits.CREN = 0;
-    RCSTAbits.CREN = 1;
-
-}
-
-void EUSART_DefaultErrorHandler(void){
-}
-
-void EUSART_SetFramingErrorHandler(void (* interruptHandler)(void)){
-    EUSART_FramingErrorHandler = interruptHandler;
-}
-
-void EUSART_SetOverrunErrorHandler(void (* interruptHandler)(void)){
-    EUSART_OverrunErrorHandler = interruptHandler;
-}
-
-void EUSART_SetErrorHandler(void (* interruptHandler)(void)){
-    EUSART_ErrorHandler = interruptHandler;
 }

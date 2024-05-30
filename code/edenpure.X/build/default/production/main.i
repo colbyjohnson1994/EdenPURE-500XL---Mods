@@ -4555,6 +4555,52 @@ void DATAEE_WriteByte(uint8_t bAdd, uint8_t bData);
 uint8_t DATAEE_ReadByte(uint8_t bAdd);
 # 57 "./mcc_generated_files/mcc.h" 2
 
+# 1 "./mcc_generated_files/tmr2.h" 1
+# 103 "./mcc_generated_files/tmr2.h"
+void TMR2_Initialize(void);
+# 132 "./mcc_generated_files/tmr2.h"
+void TMR2_StartTimer(void);
+# 164 "./mcc_generated_files/tmr2.h"
+void TMR2_StopTimer(void);
+# 199 "./mcc_generated_files/tmr2.h"
+uint8_t TMR2_ReadTimer(void);
+# 238 "./mcc_generated_files/tmr2.h"
+void TMR2_WriteTimer(uint8_t timerVal);
+# 290 "./mcc_generated_files/tmr2.h"
+void TMR2_LoadPeriodRegister(uint8_t periodVal);
+# 308 "./mcc_generated_files/tmr2.h"
+void TMR2_ISR(void);
+# 326 "./mcc_generated_files/tmr2.h"
+ void TMR2_CallBack(void);
+# 343 "./mcc_generated_files/tmr2.h"
+ void TMR2_SetInterruptHandler(void (* InterruptHandler)(void));
+# 361 "./mcc_generated_files/tmr2.h"
+extern void (*TMR2_InterruptHandler)(void);
+# 379 "./mcc_generated_files/tmr2.h"
+void TMR2_DefaultInterruptHandler(void);
+# 58 "./mcc_generated_files/mcc.h" 2
+
+# 1 "./mcc_generated_files/tmr0.h" 1
+# 104 "./mcc_generated_files/tmr0.h"
+void TMR0_Initialize(void);
+# 135 "./mcc_generated_files/tmr0.h"
+uint8_t TMR0_ReadTimer(void);
+# 174 "./mcc_generated_files/tmr0.h"
+void TMR0_WriteTimer(uint8_t timerVal);
+# 210 "./mcc_generated_files/tmr0.h"
+void TMR0_Reload(void);
+# 225 "./mcc_generated_files/tmr0.h"
+void TMR0_ISR(void);
+# 243 "./mcc_generated_files/tmr0.h"
+void TMR0_CallBack(void);
+# 261 "./mcc_generated_files/tmr0.h"
+ void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+# 279 "./mcc_generated_files/tmr0.h"
+extern void (*TMR0_InterruptHandler)(void);
+# 297 "./mcc_generated_files/tmr0.h"
+void TMR0_DefaultInterruptHandler(void);
+# 59 "./mcc_generated_files/mcc.h" 2
+
 # 1 "./mcc_generated_files/adc.h" 1
 # 72 "./mcc_generated_files/adc.h"
 typedef uint16_t adc_result_t;
@@ -4589,28 +4635,7 @@ adc_result_t ADC_GetConversionResult(void);
 adc_result_t ADC_GetConversion(adc_channel_t channel);
 # 316 "./mcc_generated_files/adc.h"
 void ADC_TemperatureAcquisitionDelay(void);
-# 58 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/tmr0.h" 1
-# 104 "./mcc_generated_files/tmr0.h"
-void TMR0_Initialize(void);
-# 135 "./mcc_generated_files/tmr0.h"
-uint8_t TMR0_ReadTimer(void);
-# 174 "./mcc_generated_files/tmr0.h"
-void TMR0_WriteTimer(uint8_t timerVal);
-# 210 "./mcc_generated_files/tmr0.h"
-void TMR0_Reload(void);
-# 225 "./mcc_generated_files/tmr0.h"
-void TMR0_ISR(void);
-# 243 "./mcc_generated_files/tmr0.h"
-void TMR0_CallBack(void);
-# 261 "./mcc_generated_files/tmr0.h"
- void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
-# 279 "./mcc_generated_files/tmr0.h"
-extern void (*TMR0_InterruptHandler)(void);
-# 297 "./mcc_generated_files/tmr0.h"
-void TMR0_DefaultInterruptHandler(void);
-# 59 "./mcc_generated_files/mcc.h" 2
+# 60 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/eusart.h" 1
 # 75 "./mcc_generated_files/eusart.h"
@@ -4643,12 +4668,12 @@ void EUSART_SetFramingErrorHandler(void (* interruptHandler)(void));
 void EUSART_SetOverrunErrorHandler(void (* interruptHandler)(void));
 # 397 "./mcc_generated_files/eusart.h"
 void EUSART_SetErrorHandler(void (* interruptHandler)(void));
-# 60 "./mcc_generated_files/mcc.h" 2
-# 75 "./mcc_generated_files/mcc.h"
+# 61 "./mcc_generated_files/mcc.h" 2
+# 76 "./mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
-# 88 "./mcc_generated_files/mcc.h"
+# 89 "./mcc_generated_files/mcc.h"
 void OSCILLATOR_Initialize(void);
-# 100 "./mcc_generated_files/mcc.h"
+# 101 "./mcc_generated_files/mcc.h"
 void WDT_Initialize(void);
 # 44 "main.c" 2
 
@@ -4656,6 +4681,7 @@ void WDT_Initialize(void);
 # 15 "./functions.h"
     void _UIControlISR();
     void _LogicControlISR();
+    void _SpkrControlISR();
 
     void _ReadSensor();
     void _ControlHeat();
@@ -4683,15 +4709,16 @@ void WDT_Initialize(void);
 
 
 
-    int CURRENT_MODE = HEAT_MODE_5;
+    int CURRENT_MODE = HEAT_MODE_0;
     int DISP_STATE = DISP_STATE_1;
     _Bool RELAY_STATUS = 0;
 
-    _Bool _LastUpState = 1;
+    _Bool _LastUpState = 0;
     _Bool _LastDownState = 0;
+    _Bool _SaveMemory = 0;
 
 
-    const int SETPOINTS[5] = {65, 68, 71, 74, 77};
+    const int SETPOINTS[6] = {0, 65, 68, 71, 74, 77};
 
 
     const int SHUT_OFF = 2;
@@ -4711,15 +4738,15 @@ void WDT_Initialize(void);
 
 
 
-    const int MIN_RUN_TIME = 3;
+    const int MIN_RUN_TIME = 1;
 
 
 
-    const int MIN_IDLE_TIME = 3;
+    const int MIN_IDLE_TIME = 1;
 
 
 
-    uint16_t HEAT_CALL_TICKS;
+    uint16_t HEAT_CALL_TICKS = MIN_IDLE_TIME * 60;
 
 
 
@@ -4729,10 +4756,11 @@ void WDT_Initialize(void);
 
     uint8_t LOGIC_TICK = 0;
 
-
-
-
-
+    uint8_t SPKR_DURATION = 2;
+    uint8_t SPKR_COUNT = 100;
+    uint8_t SPKR_DC = 0;
+    _Bool DN_CLICKED = 0;
+# 98 "./variables.h"
     _Bool READ_FLAG = 0;
     _Bool UART_FLAG = 0;
     _Bool LOGIC_FLAG = 0;
@@ -4749,6 +4777,9 @@ float my_log(float x);
 # 47 "main.c" 2
 
 
+__asm("\tpsect eeprom_data,class=EEDATA,delta=2,space=3,noexec"); __asm("\tdb\t" "0" "," "1" "," "2" "," "3" "," "4" "," "5" "," "6" "," "7");
+__asm("\tpsect eeprom_data,class=EEDATA,delta=2,space=3,noexec"); __asm("\tdb\t" "8" "," "9" "," "10" "," "11" "," "12" "," "13" "," "14" "," "15");
+
 
 
 
@@ -4756,6 +4787,8 @@ void main(void)
 {
 
     SYSTEM_Initialize();
+
+    _delay((unsigned long)((1000)*(8000000/4000.0)));
 
 
 
@@ -4774,9 +4807,27 @@ void main(void)
 
     TMR0_SetInterruptHandler(_UIControlISR);
     TMR1_SetInterruptHandler(_LogicControlISR);
+    TMR2_SetInterruptHandler(_SpkrControlISR);
+
+
+    uint8_t readVal = DATAEE_ReadByte(10);
+
+    if (readVal < 25 || readVal > (25 + HEAT_MODE_5))
+    {
+
+        CURRENT_MODE = HEAT_MODE_3;
+        _SaveMemory = 1;
+    }
+    else
+    {
+
+        CURRENT_MODE = readVal - 25;
+    }
 
     while (1)
     {
+        __asm("clrwdt");
+
         _Bool savedRelay;
 
 
@@ -4789,13 +4840,31 @@ void main(void)
         if (UART_FLAG)
         {
             UART_FLAG = 0;
-            if (1)
+            if (1 == 1)
                 _SendDataToConsole();
         }
 
         if (LOGIC_FLAG)
         {
             LOGIC_FLAG = 0;
+
+            if (_SaveMemory)
+            {
+                uint8_t saveVal = CURRENT_MODE + 25;
+                uint8_t readVal = DATAEE_ReadByte(10);
+
+                if (readVal == saveVal)
+                {
+
+
+                    _SaveMemory = 0;
+                }
+                else
+                {
+
+                    DATAEE_WriteByte(10, saveVal);
+                }
+            }
 
             savedRelay = RELAY_STATUS;
 
@@ -4805,13 +4874,13 @@ void main(void)
             {
 
                 if (HEAT_CALL_TICKS > (MIN_RUN_TIME * 60))
-                    HEAT_CALL_TICKS = MIN_RUN_TIME * 60;
+                    HEAT_CALL_TICKS = MIN_RUN_TIME * 60 + 1;
             }
             else
             {
 
                 if (HEAT_CALL_TICKS > (MIN_IDLE_TIME * 60))
-                    HEAT_CALL_TICKS = MIN_IDLE_TIME * 60;
+                    HEAT_CALL_TICKS = MIN_IDLE_TIME * 60 + 1;
             }
 
 
@@ -4824,10 +4893,42 @@ void main(void)
             }
 
             if (RELAY_STATUS)
-                do { LATAbits.LATA2 = 1; } while(0);
-            else
                 do { LATAbits.LATA2 = 0; } while(0);
+            else
+                do { LATAbits.LATA2 = 1; } while(0);
         }
+    }
+}
+
+
+void _SpkrControlISR()
+{
+    SPKR_DC++;
+
+    if (SPKR_COUNT == 0)
+    {
+        do { TRISAbits.TRISA1 = 0; } while(0);
+        SPKR_DC = 0;
+    }
+
+    if (SPKR_COUNT < SPKR_DURATION)
+    {
+        if (DN_CLICKED)
+        {
+
+            if (SPKR_DC == 0)
+                do { LATAbits.LATA1 = ~LATAbits.LATA1; } while(0);
+            if (SPKR_DC == 2)
+                do { LATAbits.LATA1 = ~LATAbits.LATA1; } while(0);
+
+            if (SPKR_DC == 3)
+                SPKR_DC = 0;
+        }
+        do { LATAbits.LATA1 = ~LATAbits.LATA1; } while(0);
+    }
+    else
+    {
+        do { TRISAbits.TRISA1 = 1; } while(0);
     }
 }
 
@@ -4845,27 +4946,21 @@ void _UIControlISR()
             btnUpRead = PORTAbits.RA4;
             btnDnRead = PORTBbits.RB0;
 
-            if (!btnUpRead)
+            do { TRISAbits.TRISA4 = 0; } while(0);
+            do { TRISBbits.TRISB0 = 0; } while(0);
+
+            if (1 == 3)
             {
-
-                if (_LastUpState)
-                {
-
-
-                    if (CURRENT_MODE > HEAT_MODE_0)
-                        CURRENT_MODE--;
-
-
-
-                }
-                else
-                {
-
-                }
+                EUSART_Write('U');
+                EUSART_Write(':');
+                EUSART_Write(btnUpRead + 48);
+                EUSART_Write('\t');
+                EUSART_Write('D');
+                EUSART_Write(':');
+                EUSART_Write(btnDnRead + 48);
+                EUSART_Write('\r');
+                EUSART_Write('\n');
             }
-
-
-            _LastUpState = btnUpRead;
 
             if (!btnDnRead)
             {
@@ -4874,11 +4969,12 @@ void _UIControlISR()
                 {
 
 
-                    if (CURRENT_MODE < HEAT_MODE_5)
-                        CURRENT_MODE++;
+                    if (CURRENT_MODE > HEAT_MODE_0)
+                        CURRENT_MODE--;
 
 
-
+                    SPKR_COUNT = 0;
+                    DN_CLICKED = 1;
                 }
                 else
                 {
@@ -4888,6 +4984,29 @@ void _UIControlISR()
 
 
             _LastDownState = btnDnRead;
+
+            if (!btnUpRead)
+            {
+
+                if (_LastUpState)
+                {
+
+
+                    if (CURRENT_MODE < HEAT_MODE_5)
+                        CURRENT_MODE++;
+
+
+                    SPKR_COUNT = 0;
+                    DN_CLICKED = 0;
+                }
+                else
+                {
+
+                }
+            }
+
+
+            _LastUpState = btnUpRead;
 
 
             DISP_STATE = DISP_STATE_2;
@@ -4943,6 +5062,8 @@ void _UIControlISR()
 
             DISP_STATE = DISP_STATE_1;
 
+            do { LATBbits.LATB1 = 0; } while(0);
+            do { LATAbits.LATA3 = 0; } while(0);
             do { TRISAbits.TRISA4 = 1; } while(0);
             do { TRISBbits.TRISB0 = 1; } while(0);
 
@@ -4965,6 +5086,10 @@ void _LogicControlISR()
 {
 
     LOGIC_TICK++;
+    SPKR_COUNT++;
+
+    if (SPKR_COUNT >= SPKR_DURATION)
+        SPKR_COUNT = SPKR_DURATION;
 
     if (LOGIC_TICK >= 3)
         READ_FLAG = 1;
@@ -5001,10 +5126,13 @@ void _ReadSensor()
 
     TEMP = (int)Tf;
 }
+
 void _ControlHeat()
 {
     if (CURRENT_MODE == HEAT_MODE_0)
     {
+        if (1 == 2)
+            EUSART_Write('O');
         RELAY_STATUS = 0;
         return;
     }
@@ -5013,8 +5141,12 @@ void _ControlHeat()
 
     if (TEMP > (SETPOINTS[CURRENT_MODE] + SHUT_OFF))
     {
+        if (1 == 2)
+            EUSART_Write('A');
         if (HEAT_CALL_TICKS > (MIN_RUN_TIME * 60))
         {
+            if (1 == 2)
+                EUSART_Write('S');
             RELAY_STATUS = 0;
             return;
         }
@@ -5024,10 +5156,14 @@ void _ControlHeat()
 
     if (TEMP < (SETPOINTS[CURRENT_MODE] - TURN_ON))
     {
+            if (1 == 2)
+                EUSART_Write('B');
 
 
         if (HEAT_CALL_TICKS > (MIN_IDLE_TIME * 60))
         {
+            if (1 == 2)
+                EUSART_Write('T');
             RELAY_STATUS = 1;
             return;
         }
@@ -5049,9 +5185,14 @@ void _SendDataToConsole()
 
     EUSART_Write('T');
     EUSART_Write(':');
-    EUSART_Write(huns + 48);
-    EUSART_Write(tens + 48);
+    if (TEMP < 0)
+        EUSART_Write('-');
+    if (huns > 0)
+        EUSART_Write(huns + 48);
+    if (tens > 0)
+        EUSART_Write(tens + 48);
     EUSART_Write(ones + 48);
+    EUSART_Write('F');
     EUSART_Write('\t');
     EUSART_Write('M');
     EUSART_Write(':');

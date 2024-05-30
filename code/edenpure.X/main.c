@@ -46,6 +46,9 @@
 #include "variables.h"
 #include "custom_math.h"
 
+__EEPROM_DATA(0, 1, 2, 3, 4, 5, 6, 7);
+__EEPROM_DATA(8, 9, 10, 11, 12, 13, 14, 15);
+
 /*
                          Main application
  */
@@ -53,6 +56,8 @@ void main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
+    
+    __delay_ms(1000); // power on delay
 
     // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
     // Use the following macros to:
@@ -71,9 +76,27 @@ void main(void)
 
     TMR0_SetInterruptHandler(_UIControlISR);
     TMR1_SetInterruptHandler(_LogicControlISR);
+    TMR2_SetInterruptHandler(_SpkrControlISR);
+    
+    // last mode is saved in address EEPROM_ADDRESS
+    uint8_t readVal = DATAEE_ReadByte(EEPROM_ADDRESS);
+    
+    if (readVal < EEPROM_VAL_OFFSET || readVal > (EEPROM_VAL_OFFSET + HEAT_MODE_5))
+    {
+        // default the initial state
+        CURRENT_MODE = HEAT_MODE_3;     // default to level 3 heat
+        _SaveMemory = true;
+    }
+    else
+    {
+        // retrieve last state
+        CURRENT_MODE = readVal - EEPROM_VAL_OFFSET;
+    }
     
     while (1)
     {
+        CLRWDT();
+        
         bool savedRelay;
         
         // monitor flags set by the ISR's
@@ -86,13 +109,31 @@ void main(void)
         if (UART_FLAG)
         {
             UART_FLAG = false;
-            if (DEBUG)
+            if (DEBUG == 1)
                 _SendDataToConsole();
         }
         
         if (LOGIC_FLAG)
         {
             LOGIC_FLAG = false;
+            
+            if (_SaveMemory)
+            {
+                uint8_t saveVal = CURRENT_MODE + EEPROM_VAL_OFFSET;
+                uint8_t readVal = DATAEE_ReadByte(EEPROM_ADDRESS);
+                
+                if (readVal == saveVal)
+                {
+                    // memory write successful
+                    // clear flag
+                    _SaveMemory = false;
+                }
+                else
+                {
+                    // try to write
+                    DATAEE_WriteByte(EEPROM_ADDRESS, saveVal);
+                }
+            }
             
             savedRelay = RELAY_STATUS;
             
@@ -102,13 +143,13 @@ void main(void)
             {
                 // cap heat call ticks at min run time
                 if (HEAT_CALL_TICKS > (MIN_RUN_TIME * 60))
-                    HEAT_CALL_TICKS = MIN_RUN_TIME * 60;
+                    HEAT_CALL_TICKS = MIN_RUN_TIME * 60 + 1;
             }
             else
             {
                 // cap heat call ticks at min idle time
                 if (HEAT_CALL_TICKS > (MIN_IDLE_TIME * 60))
-                    HEAT_CALL_TICKS = MIN_IDLE_TIME * 60;
+                    HEAT_CALL_TICKS = MIN_IDLE_TIME * 60 + 1;
             }
             
             // control the heating logic
@@ -121,10 +162,42 @@ void main(void)
             }
             
             if (RELAY_STATUS)
-                HEAT_RL_SetHigh();
-            else
                 HEAT_RL_SetLow();
+            else
+                HEAT_RL_SetHigh();
         }
+    }
+}
+
+// this functions handles toggling the spkr 
+void _SpkrControlISR()
+{
+    SPKR_DC++;
+    
+    if (SPKR_COUNT == 0)
+    {
+        BUZZ_SetDigitalOutput();
+        SPKR_DC = 0;
+    }
+    
+    if (SPKR_COUNT < SPKR_DURATION)
+    {
+        if (DN_CLICKED)
+        {
+            // only toggle 1/2 the time
+            if (SPKR_DC == 0)
+                BUZZ_Toggle();
+            if (SPKR_DC == 2)
+                BUZZ_Toggle();
+            
+            if (SPKR_DC == 3)
+                SPKR_DC = 0;
+        }
+        BUZZ_Toggle();
+    }
+    else
+    {
+        BUZZ_SetDigitalInput();
     }
 }
 
@@ -137,11 +210,50 @@ void _UIControlISR()
     // this ISR is called once every 10ms
     switch(DISP_STATE)
     {         
-        case DISP_STATE_1:
+        case DISP_STATE_1:            
             // read buttons in this state
             btnUpRead = LED2_5N_GetValue();
             btnDnRead = LED3_4N_GetValue();
             
+            LED2_5N_SetDigitalOutput();
+            LED3_4N_SetDigitalOutput();
+            
+            if (DEBUG == 3)
+            {
+                EUSART_Write('U');
+                EUSART_Write(':');
+                EUSART_Write(btnUpRead + 48);
+                EUSART_Write('\t');
+                EUSART_Write('D');
+                EUSART_Write(':');
+                EUSART_Write(btnDnRead + 48);
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+            }
+            
+            if (!btnDnRead)
+            {
+                // button clicked right now
+                if (_LastDownState)
+                {
+                    // last time we measured it wasn't clicked
+                    // trigger a btn click
+                    if (CURRENT_MODE > HEAT_MODE_0)
+                        CURRENT_MODE--;
+
+                    // trigger buzzer
+                    SPKR_COUNT = 0;
+                    DN_CLICKED = true;
+                }
+                else
+                {
+                    // do nothing we haven't released the button yet
+                }
+            }
+
+            // set last state
+            _LastDownState = btnDnRead;
+
             if (!btnUpRead)
             {
                 // button clicked right now
@@ -149,11 +261,12 @@ void _UIControlISR()
                 {
                     // last time we measured it wasn't clicked
                     // trigger a btn click
-                    if (CURRENT_MODE > HEAT_MODE_0)
-                        CURRENT_MODE--;
-                    
+                    if (CURRENT_MODE < HEAT_MODE_5)
+                        CURRENT_MODE++;
+
                     // trigger buzzer
-                    
+                    SPKR_COUNT = 0;
+                    DN_CLICKED = false;
                 }
                 else
                 {
@@ -163,28 +276,6 @@ void _UIControlISR()
             
             // set last state
             _LastUpState = btnUpRead;
-            
-            if (!btnDnRead)
-            {
-                // button clicked right now
-                if (_LastDownState)
-                {
-                    // last time we measured it wasn't clicked
-                    // trigger a btn click
-                    if (CURRENT_MODE < HEAT_MODE_5)
-                        CURRENT_MODE++;
-                    
-                    // trigger buzzer
-                    
-                }
-                else
-                {
-                    // do nothing we haven't released the button yet
-                }
-            }
-            
-            // set last state
-            _LastDownState = btnDnRead;
             
             // setup state for DISP_STATE_2
             DISP_STATE = DISP_STATE_2;
@@ -240,6 +331,8 @@ void _UIControlISR()
             // setup state for DISP_STATE_1
             DISP_STATE = DISP_STATE_1;
             
+            LED2_3P_SetLow();
+            LED4_5P_SetLow();
             LED2_5N_SetDigitalInput();
             LED3_4N_SetDigitalInput();
             
@@ -262,6 +355,10 @@ void _LogicControlISR()
 {
     // this ISR is called once every 100ms
     LOGIC_TICK++;
+    SPKR_COUNT++;
+    
+    if (SPKR_COUNT >= SPKR_DURATION)
+        SPKR_COUNT = SPKR_DURATION;
     
     if (LOGIC_TICK >= READ_PERIOD)
         READ_FLAG = true;
@@ -298,10 +395,13 @@ void _ReadSensor()
     
     TEMP = (int)Tf;
 }
+
 void _ControlHeat()
 {
     if (CURRENT_MODE == HEAT_MODE_0)
     {
+        if (DEBUG == 2)
+            EUSART_Write('O');
         RELAY_STATUS = false;
         return;
     }
@@ -310,8 +410,12 @@ void _ControlHeat()
     // long enough, shut down
     if (TEMP > (SETPOINTS[CURRENT_MODE] + SHUT_OFF))
     {
+        if (DEBUG == 2)
+            EUSART_Write('A');
         if (HEAT_CALL_TICKS > (MIN_RUN_TIME * 60))
         {
+            if (DEBUG == 2)
+                EUSART_Write('S');
             RELAY_STATUS = false;
             return;
         }
@@ -321,10 +425,14 @@ void _ControlHeat()
     
     if (TEMP < (SETPOINTS[CURRENT_MODE] - TURN_ON))
     {
+            if (DEBUG == 2)
+                EUSART_Write('B');
         // we are below our setpoint
         // check if we have been off long enough
         if (HEAT_CALL_TICKS > (MIN_IDLE_TIME * 60))
         {
+            if (DEBUG == 2)
+                EUSART_Write('T');
             RELAY_STATUS = true;
             return;
         }
@@ -346,9 +454,14 @@ void _SendDataToConsole()
     // current temp
     EUSART_Write('T');
     EUSART_Write(':');
-    EUSART_Write(huns + 48);
-    EUSART_Write(tens + 48);
+    if (TEMP < 0)
+        EUSART_Write('-');
+    if (huns > 0)
+        EUSART_Write(huns + 48);
+    if (tens > 0)
+        EUSART_Write(tens + 48);
     EUSART_Write(ones + 48);
+    EUSART_Write('F');
     EUSART_Write('\t');
     EUSART_Write('M');
     EUSART_Write(':');

@@ -202,6 +202,7 @@ void DATAEE_WriteByte(uint8_t bAdd, uint8_t bData)
     // Wait for write to complete
     while (EECON1bits.WR)
     {
+        NOP();
     }
 
     EECON1bits.WREN = 0;    // Disable writes
@@ -215,6 +216,7 @@ uint8_t DATAEE_ReadByte(uint8_t bAdd)
     EECON1bits.EEPGD = 0;   // Point to DATA memory
     EECON1bits.RD = 1;      // EE Read
     NOP();  // NOPs may be required for latency at high frequencies
+    NOP();
     NOP();
 
     return (EEDATL);
