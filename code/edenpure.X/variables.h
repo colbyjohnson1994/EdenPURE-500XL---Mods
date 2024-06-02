@@ -88,12 +88,14 @@ extern "C" {
                         // 1 - temp, mode and relay status
                         // 2 - heat control states
                         // 3 - button read adc
+                        // 4 - eeprom debug
 #define READ_PERIOD 3   // number of 100ms ticks often we read from the sensor
 #define UART_PERIOD 5   // number of 100ms ticks often we send data out on console
     
 #define EEPROM_VAL_OFFSET  25  //randomly picked value to make sure value read back on blank memory
                         // doesn't cause issue.
 #define EEPROM_ADDRESS      10
+#define TEMP_OFFSET         -3  // temperature offset to calibrate the NTC
     
     bool READ_FLAG = false;     // read/average from sensor flag
     bool UART_FLAG = false;     // send uart data flag

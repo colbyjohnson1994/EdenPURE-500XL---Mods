@@ -4760,7 +4760,7 @@ void WDT_Initialize(void);
     uint8_t SPKR_COUNT = 100;
     uint8_t SPKR_DC = 0;
     _Bool DN_CLICKED = 0;
-# 98 "./variables.h"
+# 100 "./variables.h"
     _Bool READ_FLAG = 0;
     _Bool UART_FLAG = 0;
     _Bool LOGIC_FLAG = 0;
@@ -4812,8 +4812,24 @@ void main(void)
 
     uint8_t readVal = DATAEE_ReadByte(10);
 
+    if (1 == 4)
+    {
+        EUSART_Write('R');
+        EUSART_Write(':');
+        EUSART_Write(readVal + 48);
+        EUSART_Write('\r');
+        EUSART_Write('\n');
+    }
+
     if (readVal < 25 || readVal > (25 + HEAT_MODE_5))
     {
+        if (1 == 4)
+        {
+            EUSART_Write('D');
+            EUSART_Write('S');
+            EUSART_Write('\r');
+            EUSART_Write('\n');
+        }
 
         CURRENT_MODE = HEAT_MODE_3;
         _SaveMemory = 1;
@@ -4822,6 +4838,16 @@ void main(void)
     {
 
         CURRENT_MODE = readVal - 25;
+
+        if (1 == 4)
+        {
+            EUSART_Write('S');
+            EUSART_Write('S');
+            EUSART_Write(':');
+            EUSART_Write(CURRENT_MODE + 48);
+            EUSART_Write('\r');
+            EUSART_Write('\n');
+        }
     }
 
     while (1)
@@ -4853,16 +4879,42 @@ void main(void)
                 uint8_t saveVal = CURRENT_MODE + 25;
                 uint8_t readVal = DATAEE_ReadByte(10);
 
+                if (1 == 4)
+                {
+                    EUSART_Write('R');
+                    EUSART_Write('S');
+                    EUSART_Write(':');
+                    EUSART_Write(readVal + 48);
+                    EUSART_Write('\r');
+                    EUSART_Write('\n');
+                }
+
                 if (readVal == saveVal)
                 {
 
 
                     _SaveMemory = 0;
+
+                    if (1 == 4)
+                    {
+                        EUSART_Write('W');
+                        EUSART_Write('S');
+                        EUSART_Write('\r');
+                        EUSART_Write('\n');
+                    }
                 }
                 else
                 {
 
                     DATAEE_WriteByte(10, saveVal);
+
+                    if (1 == 4)
+                    {
+                        EUSART_Write('W');
+                        EUSART_Write('A');
+                        EUSART_Write('\r');
+                        EUSART_Write('\n');
+                    }
                 }
             }
 
@@ -4970,7 +5022,18 @@ void _UIControlISR()
 
 
                     if (CURRENT_MODE > HEAT_MODE_0)
+                    {
                         CURRENT_MODE--;
+                        _SaveMemory = 1;
+
+                        if (1 == 4)
+                        {
+                            EUSART_Write('D');
+                            EUSART_Write('C');
+                            EUSART_Write('\r');
+                            EUSART_Write('\n');
+                        }
+                    }
 
 
                     SPKR_COUNT = 0;
@@ -4993,7 +5056,18 @@ void _UIControlISR()
 
 
                     if (CURRENT_MODE < HEAT_MODE_5)
+                    {
                         CURRENT_MODE++;
+                        _SaveMemory = 1;
+
+                        if (1 == 4)
+                        {
+                            EUSART_Write('D');
+                            EUSART_Write('C');
+                            EUSART_Write('\r');
+                            EUSART_Write('\n');
+                        }
+                    }
 
 
                     SPKR_COUNT = 0;
@@ -5124,7 +5198,7 @@ void _ReadSensor()
     float Tc = T - 273.15f;
     float Tf = (1.8f * Tc) + 32.0f;
 
-    TEMP = (int)Tf;
+    TEMP = (int)Tf + -3;
 }
 
 void _ControlHeat()

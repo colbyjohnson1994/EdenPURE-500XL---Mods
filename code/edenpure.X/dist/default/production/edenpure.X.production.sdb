@@ -25,7 +25,7 @@ DISP_STATE_1 0
 DISP_STATE_2 1
 DISP_STATE_3 2
 ]
-"379 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+"453 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [e E2878 . `uc
 NTC 6
 channel_Temp 29
@@ -62,17 +62,17 @@ channel_FVR 31
 [v _my_log my_log `(f  1 e 4 0 ]
 "55 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"173
+"225
 [v __SpkrControlISR _SpkrControlISR `(v  1 e 1 0 ]
-"206
+"258
 [v __UIControlISR _UIControlISR `(v  1 e 1 0 ]
-"354
+"428
 [v __LogicControlISR _LogicControlISR `(v  1 e 1 0 ]
-"376
+"450
 [v __ReadSensor _ReadSensor `(v  1 e 1 0 ]
-"399
+"473
 [v __ControlHeat _ControlHeat `(v  1 e 1 0 ]
-"444
+"518
 [v __SendDataToConsole _SendDataToConsole `(v  1 e 1 0 ]
 "67 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/adc.c
 [v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
@@ -175,11 +175,11 @@ channel_FVR 31
 [v _SPKR_DC SPKR_DC `uc  1 e 1 0 ]
 "84
 [v _DN_CLICKED DN_CLICKED `a  1 e 1 0 ]
-"98
-[v _READ_FLAG READ_FLAG `a  1 e 1 0 ]
-"99
-[v _UART_FLAG UART_FLAG `a  1 e 1 0 ]
 "100
+[v _READ_FLAG READ_FLAG `a  1 e 1 0 ]
+"101
+[v _UART_FLAG UART_FLAG `a  1 e 1 0 ]
+"102
 [v _LOGIC_FLAG LOGIC_FLAG `a  1 e 1 0 ]
 [s S185 . 1 `uc 1 IOCIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
@@ -198,7 +198,7 @@ channel_FVR 31
 ]
 [u S199 . 1 `S185 1 . 1 0 `S194 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES199  1 e 1 @11 ]
-[s S858 . 1 `uc 1 RA0 1 0 :1:0 
+[s S859 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -208,9 +208,9 @@ channel_FVR 31
 `uc 1 RA7 1 0 :1:7 
 ]
 "447
-[u S867 . 1 `S858 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES867  1 e 1 @12 ]
-[s S879 . 1 `uc 1 RB0 1 0 :1:0 
+[u S868 . 1 `S859 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES868  1 e 1 @12 ]
+[s S880 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -220,8 +220,8 @@ channel_FVR 31
 `uc 1 RB7 1 0 :1:7 
 ]
 "509
-[u S888 . 1 `S879 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES888  1 e 1 @13 ]
+[u S889 . 1 `S880 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES889  1 e 1 @13 ]
 [s S300 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
@@ -299,7 +299,7 @@ channel_FVR 31
 [v _T2CONbits T2CONbits `VES1116  1 e 1 @28 ]
 "1166
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
-[s S837 . 1 `uc 1 TRISA0 1 0 :1:0 
+[s S838 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -309,11 +309,11 @@ channel_FVR 31
 `uc 1 TRISA7 1 0 :1:7 
 ]
 "1183
-[u S846 . 1 `S837 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES846  1 e 1 @140 ]
+[u S847 . 1 `S838 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES847  1 e 1 @140 ]
 "1228
 [v _TRISB TRISB `VEuc  1 e 1 @141 ]
-[s S900 . 1 `uc 1 TRISB0 1 0 :1:0 
+[s S901 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -323,8 +323,8 @@ channel_FVR 31
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "1245
-[u S909 . 1 `S900 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES909  1 e 1 @141 ]
+[u S910 . 1 `S901 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES910  1 e 1 @141 ]
 [s S279 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
@@ -390,7 +390,7 @@ channel_FVR 31
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
 "2053
 [v _LATA LATA `VEuc  1 e 1 @268 ]
-[s S816 . 1 `uc 1 LATA0 1 0 :1:0 
+[s S817 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 LATA3 1 0 :1:3 
@@ -400,8 +400,8 @@ channel_FVR 31
 `uc 1 LATA7 1 0 :1:7 
 ]
 "2070
-[u S825 . 1 `S816 1 . 1 0 ]
-[v _LATAbits LATAbits `VES825  1 e 1 @268 ]
+[u S826 . 1 `S817 1 . 1 0 ]
+[v _LATAbits LATAbits `VES826  1 e 1 @268 ]
 "2110
 [v _LATB LATB `VEuc  1 e 1 @269 ]
 [s S922 . 1 `uc 1 LATB0 1 0 :1:0 
@@ -517,24 +517,24 @@ channel_FVR 31
 "55 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"122
-[v main@saveVal saveVal `uc  1 a 1 33 ]
-"123
-[v main@readVal_991 readVal `uc  1 a 1 32 ]
-"100
+"149
+[v main@readVal_992 readVal `uc  1 a 1 33 ]
+"148
+[v main@saveVal saveVal `uc  1 a 1 32 ]
+"126
 [v main@savedRelay savedRelay `a  1 a 1 31 ]
 "82
 [v main@readVal readVal `uc  1 a 1 34 ]
-"170
+"222
 } 0
-"444
+"518
 [v __SendDataToConsole _SendDataToConsole `(v  1 e 1 0 ]
 {
-"448
+"522
 [v __SendDataToConsole@huns huns `i  1 a 2 21 ]
 [v __SendDataToConsole@tens tens `i  1 a 2 19 ]
 [v __SendDataToConsole@ones ones `i  1 a 2 17 ]
-"475
+"549
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
@@ -559,30 +559,30 @@ channel_FVR 31
 [v ___awdiv@dividend dividend `i  1 p 2 6 ]
 "41
 } 0
-"376 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+"450 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [v __ReadSensor _ReadSensor `(v  1 e 1 0 ]
 {
-"388
+"462
 [v __ReadSensor@logR logR `f  1 a 4 46 ]
-"394
+"468
 [v __ReadSensor@Tf Tf `f  1 a 4 28 ]
-"393
+"467
 [v __ReadSensor@Tc Tc `f  1 a 4 24 ]
-"392
+"466
 [v __ReadSensor@T T `f  1 a 4 20 ]
-"391
+"465
 [v __ReadSensor@invT invT `f  1 a 4 16 ]
-"385
+"459
 [v __ReadSensor@Rntc Rntc `f  1 a 4 12 ]
-"384
+"458
 [v __ReadSensor@Vcc Vcc `f  1 a 4 8 ]
-"383
+"457
 [v __ReadSensor@Rpullup Rpullup `f  1 a 4 4 ]
-"380
+"454
 [v __ReadSensor@Vout Vout `f  1 a 4 0 ]
-"379
+"453
 [v __ReadSensor@adcValue adcValue `us  1 a 2 44 ]
-"397
+"471
 } 0
 "4 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\custom_math.c
 [v _my_log my_log `(f  1 e 4 0 ]
@@ -728,10 +728,10 @@ channel_FVR 31
 [v ADC_GetConversion@channel channel `E2490  1 a 1 1 ]
 "133
 } 0
-"399 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+"473 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [v __ControlHeat _ControlHeat `(v  1 e 1 0 ]
 {
-"442
+"516
 } 0
 "132 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/eusart.c
 [v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
@@ -863,10 +863,10 @@ channel_FVR 31
 {
 "147
 } 0
-"173 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+"225 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [v __SpkrControlISR _SpkrControlISR `(v  1 e 1 0 ]
 {
-"202
+"254
 } 0
 "157 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/tmr1.c
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
@@ -889,10 +889,10 @@ channel_FVR 31
 {
 "185
 } 0
-"354 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+"428 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [v __LogicControlISR _LogicControlISR `(v  1 e 1 0 ]
 {
-"374
+"448
 } 0
 "108 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/tmr0.c
 [v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
@@ -909,13 +909,13 @@ channel_FVR 31
 {
 "140
 } 0
-"206 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
+"258 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\main.c
 [v __UIControlISR _UIControlISR `(v  1 e 1 0 ]
 {
-"208
+"260
 [v __UIControlISR@btnDnRead btnDnRead `a  1 a 1 3 ]
 [v __UIControlISR@btnUpRead btnUpRead `a  1 a 1 2 ]
-"349
+"423
 } 0
 "132 C:\Users\colby\OneDrive\Documents\GitHub\EdenPURE-500XL---Mods\code\edenpure.X\mcc_generated_files/eusart.c
 [v i1_EUSART_Write EUSART_Write `(v  1 e 1 0 ]

@@ -81,8 +81,24 @@ void main(void)
     // last mode is saved in address EEPROM_ADDRESS
     uint8_t readVal = DATAEE_ReadByte(EEPROM_ADDRESS);
     
+    if (DEBUG == 4)
+    {
+        EUSART_Write('R');
+        EUSART_Write(':');
+        EUSART_Write(readVal + 48);
+        EUSART_Write('\r');
+        EUSART_Write('\n');
+    }
+    
     if (readVal < EEPROM_VAL_OFFSET || readVal > (EEPROM_VAL_OFFSET + HEAT_MODE_5))
     {
+        if (DEBUG == 4)
+        {
+            EUSART_Write('D');
+            EUSART_Write('S');
+            EUSART_Write('\r');
+            EUSART_Write('\n');
+        }
         // default the initial state
         CURRENT_MODE = HEAT_MODE_3;     // default to level 3 heat
         _SaveMemory = true;
@@ -91,6 +107,16 @@ void main(void)
     {
         // retrieve last state
         CURRENT_MODE = readVal - EEPROM_VAL_OFFSET;
+        
+        if (DEBUG == 4)
+        {
+            EUSART_Write('S');
+            EUSART_Write('S');
+            EUSART_Write(':');
+            EUSART_Write(CURRENT_MODE + 48);
+            EUSART_Write('\r');
+            EUSART_Write('\n');
+        }
     }
     
     while (1)
@@ -122,16 +148,42 @@ void main(void)
                 uint8_t saveVal = CURRENT_MODE + EEPROM_VAL_OFFSET;
                 uint8_t readVal = DATAEE_ReadByte(EEPROM_ADDRESS);
                 
+                if (DEBUG == 4)
+                {
+                    EUSART_Write('R');
+                    EUSART_Write('S');
+                    EUSART_Write(':');
+                    EUSART_Write(readVal + 48);
+                    EUSART_Write('\r');
+                    EUSART_Write('\n');
+                }
+                
                 if (readVal == saveVal)
                 {
                     // memory write successful
                     // clear flag
                     _SaveMemory = false;
+                
+                    if (DEBUG == 4)
+                    {
+                        EUSART_Write('W');
+                        EUSART_Write('S');
+                        EUSART_Write('\r');
+                        EUSART_Write('\n');
+                    }
                 }
                 else
                 {
                     // try to write
                     DATAEE_WriteByte(EEPROM_ADDRESS, saveVal);
+                
+                    if (DEBUG == 4)
+                    {
+                        EUSART_Write('W');
+                        EUSART_Write('A');
+                        EUSART_Write('\r');
+                        EUSART_Write('\n');
+                    }
                 }
             }
             
@@ -239,7 +291,18 @@ void _UIControlISR()
                     // last time we measured it wasn't clicked
                     // trigger a btn click
                     if (CURRENT_MODE > HEAT_MODE_0)
+                    {
                         CURRENT_MODE--;
+                        _SaveMemory = true;
+                        
+                        if (DEBUG == 4)
+                        {
+                            EUSART_Write('D');
+                            EUSART_Write('C');
+                            EUSART_Write('\r');
+                            EUSART_Write('\n');
+                        }
+                    }
 
                     // trigger buzzer
                     SPKR_COUNT = 0;
@@ -262,7 +325,18 @@ void _UIControlISR()
                     // last time we measured it wasn't clicked
                     // trigger a btn click
                     if (CURRENT_MODE < HEAT_MODE_5)
+                    {
                         CURRENT_MODE++;
+                        _SaveMemory = true;
+                        
+                        if (DEBUG == 4)
+                        {
+                            EUSART_Write('D');
+                            EUSART_Write('C');
+                            EUSART_Write('\r');
+                            EUSART_Write('\n');
+                        }
+                    }
 
                     // trigger buzzer
                     SPKR_COUNT = 0;
@@ -393,7 +467,7 @@ void _ReadSensor()
     float Tc = T - 273.15f; // Convert Kelvin to Celsius
     float Tf = (1.8f * Tc) + 32.0f;
     
-    TEMP = (int)Tf;
+    TEMP = (int)Tf + TEMP_OFFSET;   // save the value, add in (or subtract our calibrated offset)
 }
 
 void _ControlHeat()
